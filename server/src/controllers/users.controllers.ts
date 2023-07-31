@@ -11,7 +11,7 @@ export const getAllUsers = (req: Request, res: Response): void => {
 
 
 export const getUserById = (req: Request, res: Response): void => {
-    res.status(200).send("USER successfully RECEIVED")
+    res.status(200).send(`USER ${req.params.userId} successfully RECEIVED`)
 }
 
 export const updateUser = (req: Request, res: Response): void => {
