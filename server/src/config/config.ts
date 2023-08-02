@@ -6,15 +6,15 @@ type TConfig = {
 
 type EnviromentConfig = {
     app: AppConfig,
-    DB: DBConfig;
+    DB: MongoDBConfig;
 }
 
 type AppConfig = {
     PORT: string | number;
 }
 
-type DBConfig = {
-    URI: string,
+type MongoDBConfig = {
+    URI: string | undefined,
 }
 
 
@@ -32,7 +32,7 @@ const CONFIG: TConfig = {
             PORT: process.env.PORT || 8081
         },
         DB: {
-            URI: process.env.MONGODB_URI || "mongodb://localhost/movie_hub",
+            URI: process.env.MONGODB_URI
         }
     },
     production: {
@@ -40,7 +40,7 @@ const CONFIG: TConfig = {
             PORT: process.env.PORT || 8082
         },
         DB: {
-            URI: process.env.MONGODB_URI || "mongodb://localhost:27017/movie_hub",
+            URI: process.env.MONGODB_URI
         }
     }
 }
