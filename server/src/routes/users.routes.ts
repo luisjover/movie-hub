@@ -4,14 +4,14 @@ import { createUser, deleteUser, getAllUsers, getUserById, updateUser } from "..
 const usersRoutes = Router()
 
 
+usersRoutes.post("/", createUser)
+
 usersRoutes.get("/", getAllUsers)
 
 usersRoutes.get("/:userId", getUserById)
 
-usersRoutes.post("/", createUser)
-
 usersRoutes.put("/:userId", updateUser)
 
-usersRoutes.delete("/", deleteUser)
+usersRoutes.delete("/:userId", deleteUser)
 
 export default usersRoutes
