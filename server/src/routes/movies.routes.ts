@@ -1,10 +1,11 @@
 import { Router, Request, Response } from "express"
 import { addMovie, deleteMovie, getAllMovies, getMovieById, updateMovie } from "../controllers/movies.controllers"
+import { checkMovieValidity } from "../middlewares/checkMovies.middleware"
 
 const moviesRoutes = Router()
 
 
-moviesRoutes.post("/:userId", addMovie)
+moviesRoutes.post("/:userId", checkMovieValidity, addMovie)
 
 moviesRoutes.get("/", getAllMovies)
 
