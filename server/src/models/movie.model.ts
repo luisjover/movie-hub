@@ -22,8 +22,7 @@ const MovieSchema = new Schema<IMovieDocument>({
     },
     year: {
         type: String,
-        required: [true, "Year is required"],
-        unique: true
+        required: [true, "Year is required"]
     },
     cover_img: String,
     score: {
