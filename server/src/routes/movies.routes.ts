@@ -4,14 +4,14 @@ import { addMovie, deleteMovie, getAllMovies, getMovieById, updateMovie } from "
 const moviesRoutes = Router()
 
 
+moviesRoutes.post("/:userId", addMovie)
+
 moviesRoutes.get("/", getAllMovies)
 
 moviesRoutes.get("/:movieId", getMovieById)
 
-moviesRoutes.post("/", addMovie)
-
 moviesRoutes.put("/:movieId", updateMovie)
 
-moviesRoutes.delete("/", deleteMovie)
+moviesRoutes.delete("/:movieId", deleteMovie)
 
 export default moviesRoutes

@@ -1,8 +1,32 @@
-import { Request, Response } from "express"
+import { Request, Response } from "express";
+import { MovieModel } from "../models/movie.model";
+import { UserModel } from "../models/user.model";
 
 
-export const addMovie = (req: Request, res: Response): void => {
-    res.status(200).send("USER successfully CREATED")
+export const addMovie = async (req: Request, res: Response) => {
+
+    const { name, year, cover_img, score, genres } = req.body;
+    const { userId } = req.params;
+
+    try {
+        const newMovie = await MovieModel.create({
+            name,
+            year,
+            cover_img,
+            score,
+            genres
+        });
+
+        await UserModel.findByIdAndUpdate({ _id: userId }, {
+            $push: { movies: newMovie._id }
+        }, { new: true });
+
+        res.status(201).send(newMovie);
+
+
+    } catch (error) {
+        res.status(500).send(error);
+    }
 }
 
 export const getAllMovies = (req: Request, res: Response): void => {

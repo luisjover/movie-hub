@@ -46,7 +46,7 @@ export const getUserById = async (req: Request, res: Response) => {
 
     try {
 
-        const requiredUser = await UserModel.findById({ _id: userId });
+        const requiredUser = await UserModel.findById({ _id: userId }).populate("movies");
 
         res.status(201).send(requiredUser);
 
