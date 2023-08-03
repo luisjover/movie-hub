@@ -1,5 +1,8 @@
 import { Request, Response } from "express";
-import { IUserDocument, UserModel } from "../models/user.model";
+import { PrismaClient } from "@prisma/client";
+
+const prisma = new PrismaClient();
+
 
 
 export const createUser = async (req: Request, res: Response) => {
@@ -12,10 +15,8 @@ export const createUser = async (req: Request, res: Response) => {
             res.status(400).send({ error: "Missing one or more required fields" });
         }
 
-        const newUser = await UserModel.create({
-            name,
-            email,
-            password
+        const newUser = await prisma.users.create({
+            data: { name, email, password }
         })
 
         res.status(201).send(newUser);
@@ -30,9 +31,9 @@ export const getAllUsers = async (req: Request, res: Response) => {
 
     try {
 
-        const allUsers = await UserModel.find();
+        const allUsers = await prisma.users.findMany();
 
-        res.status(201).send(allUsers);
+        res.status(201).json(allUsers);
 
     } catch (error) {
 
@@ -46,7 +47,7 @@ export const getUserById = async (req: Request, res: Response) => {
 
     try {
 
-        const requiredUser = await UserModel.findById({ _id: userId }).populate("movies");
+        const requiredUser = await prisma.users.findFirst({ where: { id: userId } }); //include: { movies: true };
 
         res.status(201).send(requiredUser);
 
@@ -66,9 +67,11 @@ export const updateUser = async (req: Request, res: Response) => {
             res.status(400).send({ error: "Missing one or more required fields" });
         }
 
-        const updatedUser = await UserModel.findByIdAndUpdate({ _id: userId }, {
-            $set: { name: name, email: email }
-        }, { new: true });
+        const updatedUser = await prisma.users.update({
+            where: { id: userId },
+            data: { name, email }
+
+        });
 
         res.status(201).send(updatedUser);
 
@@ -84,7 +87,9 @@ export const deleteUser = async (req: Request, res: Response) => {
 
     try {
 
-        const deletedUser = await UserModel.findByIdAndDelete({ _id: userId });
+        const deletedUser = await prisma.users.delete({
+            where: { id: userId }
+        });
         res.status(200).send(deletedUser);
 
     } catch (error) {

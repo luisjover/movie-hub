@@ -1,27 +1,30 @@
 import { Request, Response } from "express";
-import { MovieModel } from "../models/movie.model";
-import { UserModel } from "../models/user.model";
+import { PrismaClient } from "@prisma/client";
+
+const prisma = new PrismaClient();
 
 
 export const addMovie = async (req: Request, res: Response) => {
 
-    const { name, year, cover_img, score, genres } = req.body;
     const { userId } = req.params;
 
     try {
-        const newMovie = await MovieModel.create({
-            name,
-            year,
-            cover_img,
-            score,
-            genres
+        const newMovie = await prisma.movies.create({
+            data: req.body
         });
 
-        await UserModel.findByIdAndUpdate({ _id: userId }, {
-            $push: { movies: newMovie._id }
-        }, { new: true });
+        const userUpdated = await prisma.users.update({
+            where: {
+                id: userId,
+            },
+            data: {
+                movies: {
+                    push: newMovie.id
+                }
+            }
+        })
 
-        res.status(201).send(newMovie);
+        res.status(201).json(newMovie);
 
 
     } catch (error) {
@@ -32,7 +35,7 @@ export const addMovie = async (req: Request, res: Response) => {
 export const getAllMovies = async (req: Request, res: Response) => {
 
     try {
-        const allMovies = await MovieModel.find();
+        const allMovies = await prisma.movies.findMany();
         res.status(201).send(allMovies);
     } catch (error) {
         res.status(500).send(error);
@@ -44,7 +47,10 @@ export const getMovieById = async (req: Request, res: Response) => {
     const { movieId } = req.params;
 
     try {
-        const requiredMovie = await MovieModel.findById({ _id: movieId });
+        const requiredMovie = await prisma.movies.findFirst({
+            where: { id: movieId }
+        });
+
         res.status(201).send(requiredMovie);
     } catch (error) {
         res.status(500).send(error);
@@ -53,14 +59,16 @@ export const getMovieById = async (req: Request, res: Response) => {
 
 export const updateMovie = async (req: Request, res: Response) => {
 
-    const { name, year, cover_img, score, genres } = req.body;
     const { movieId } = req.params;
 
     try {
-        const updatedMovie = await MovieModel.findByIdAndUpdate({ _id: movieId }, {
-            $set: { name: name, year: year, cover_img: cover_img, score: score, genres: genres }
-        }, { new: true });
+        const updatedMovie = await prisma.movies.update({
+            where: { id: movieId },
+            data: req.body
+        });
+
         res.status(201).send(updatedMovie);
+
     } catch (error) {
         res.status(500).send(error);
     }
@@ -71,8 +79,12 @@ export const deleteMovie = (req: Request, res: Response) => {
     const { movieId } = req.params;
 
     try {
-        const deletedMovie = MovieModel.findByIdAndDelete({ _id: movieId });
+        const deletedMovie = prisma.movies.delete({
+            where: { id: movieId }
+        });
+
         res.status(200).send(deletedMovie);
+
     } catch (error) {
 
     }

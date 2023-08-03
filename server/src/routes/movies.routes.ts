@@ -5,7 +5,7 @@ import { checkMovieValidity } from "../middlewares/checkMovies.middleware"
 const moviesRoutes = Router()
 
 
-moviesRoutes.post("/:userId", checkMovieValidity, addMovie)
+moviesRoutes.post("/:userId", addMovie)
 
 moviesRoutes.get("/", getAllMovies)
 
