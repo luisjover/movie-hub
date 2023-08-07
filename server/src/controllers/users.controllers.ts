@@ -47,7 +47,7 @@ export const getUserById = async (req: Request, res: Response) => {
 
     try {
 
-        const requiredUser = await prisma.users.findFirst({ where: { id: userId } }); //include: { movies: true };
+        const requiredUser = await prisma.users.findFirst({ where: { id: userId }, include: { movies: true } });
 
         res.status(201).send(requiredUser);
 

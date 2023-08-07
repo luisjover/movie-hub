@@ -10,19 +10,20 @@ export const addMovie = async (req: Request, res: Response) => {
 
     try {
         const newMovie = await prisma.movies.create({
-            data: req.body
-        });
-
-        const userUpdated = await prisma.users.update({
-            where: {
-                id: userId,
-            },
             data: {
-                movies: {
-                    push: newMovie.id
+                title: req.body.title,
+                year: req.body.year,
+                cover_img: req.body.cover_img,
+                score: req.body.score,
+                Users: {
+                    connect: {
+                        id: userId
+                    }
                 }
             }
-        })
+        });
+
+
 
         res.status(201).json(newMovie);
 
