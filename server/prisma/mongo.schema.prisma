@@ -1,0 +1,32 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "./generated/mongo_client"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("MONGODB_URL")
+}
+
+model Users {
+  id       String   @id @default(auto()) @map("_id") @db.ObjectId
+  name     String
+  email    String   @unique
+  password String
+  movies   Movies[]
+}
+
+model Movies {
+  id        String @id @default(auto()) @map("_id") @db.ObjectId
+  title     String
+  year      Int
+  cover_img String
+  score     Int
+  // genres    String[]
+
+  Users   Users?  @relation(fields: [usersId], references: [id], onDelete: Cascade)
+  usersId String? @db.ObjectId
+}

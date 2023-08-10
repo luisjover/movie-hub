@@ -1,0 +1,30 @@
+generator client {
+    provider = "prisma-client-js"
+    output   = "./generated/postgres_client"
+}
+
+datasource db {
+    provider = "postgresql"
+    url      = env("POSTGRES_URL")
+}
+
+model Users {
+    id        Int      @id @default(autoincrement())
+    name      String
+    email     String   @unique
+    password  String
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+    posts     Movies[]
+}
+
+model Movies {
+    id        Int      @id @default(autoincrement())
+    title     String   @db.VarChar(255)
+    score     Int
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+
+    Users   Users? @relation(fields: [usersId], references: [id], onDelete: Cascade)
+    usersId Int?
+}
