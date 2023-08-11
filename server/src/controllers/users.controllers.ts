@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
-import { prisma } from "../db/clientPrisma";
+import prisma from "../db/clientPrisma";
+import { adaptIdToDB } from "../utils/functions";
 
 
 
@@ -15,6 +16,7 @@ export const createUser = async (req: Request, res: Response) => {
             res.status(400).send({ error: "Missing one or more required fields" });
         }
 
+        //@ts-ignore
         const newUser = await prisma.users.create({
             data: { name, email, password }
         })
@@ -31,6 +33,7 @@ export const getAllUsers = async (req: Request, res: Response) => {
 
     try {
 
+        //@ts-ignore
         const allUsers = await prisma.users.findMany();
 
         res.status(201).json(allUsers);
@@ -43,12 +46,22 @@ export const getAllUsers = async (req: Request, res: Response) => {
 
 export const getUserById = async (req: Request, res: Response) => {
 
-    const { userId } = req.params;
+    const { id } = req.params;
+    const userId = adaptIdToDB(id);
 
     try {
 
-        const requiredUser = await prisma.users.findFirst({ where: { id: userId }, include: { movies: true } });
+        //@ts-ignore
+        const requiredUser = await prisma.users.findUnique({
+            where: {
+                id: userId
+            },
+            include: {
+                movies: true
+            }
+        });
 
+        // 
         res.status(201).send(requiredUser);
 
 
@@ -59,7 +72,8 @@ export const getUserById = async (req: Request, res: Response) => {
 
 export const updateUser = async (req: Request, res: Response) => {
 
-    const { userId } = req.params;
+    const { id } = req.params;
+    const userId = adaptIdToDB(id);
     const { name, email } = req.body;
     try {
 
@@ -67,6 +81,7 @@ export const updateUser = async (req: Request, res: Response) => {
             res.status(400).send({ error: "Missing one or more required fields" });
         }
 
+        //@ts-ignore
         const updatedUser = await prisma.users.update({
             where: { id: userId },
             data: { name, email }
@@ -83,10 +98,12 @@ export const updateUser = async (req: Request, res: Response) => {
 
 export const deleteUser = async (req: Request, res: Response) => {
 
-    const { userId } = req.params;
+    const { id } = req.params;
+    const userId = adaptIdToDB(id);
 
     try {
 
+        //@ts-ignore
         const deletedUser = await prisma.users.delete({
             where: { id: userId }
         });

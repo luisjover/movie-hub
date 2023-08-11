@@ -15,13 +15,16 @@ model Users {
     password  String
     createdAt DateTime @default(now())
     updatedAt DateTime @updatedAt
-    posts     Movies[]
+    movies    Movies[]
 }
 
 model Movies {
     id        Int      @id @default(autoincrement())
     title     String   @db.VarChar(255)
+    year      Int
+    cover_img String
     score     Int
+    genres    String[]
     createdAt DateTime @default(now())
     updatedAt DateTime @updatedAt
 

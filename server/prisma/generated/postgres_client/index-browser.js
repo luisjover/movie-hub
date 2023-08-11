@@ -133,7 +133,10 @@ exports.Prisma.UsersScalarFieldEnum = {
 exports.Prisma.MoviesScalarFieldEnum = {
   id: 'id',
   title: 'title',
+  year: 'year',
+  cover_img: 'cover_img',
   score: 'score',
+  genres: 'genres',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
   usersId: 'usersId'

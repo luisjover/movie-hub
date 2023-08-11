@@ -937,11 +937,11 @@ export namespace Prisma {
    */
 
   export type UsersCountOutputType = {
-    posts: number
+    movies: number
   }
 
   export type UsersCountOutputTypeSelect<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
-    posts?: boolean | UsersCountOutputTypeCountPostsArgs
+    movies?: boolean | UsersCountOutputTypeCountMoviesArgs
   }
 
   // Custom InputTypes
@@ -960,7 +960,7 @@ export namespace Prisma {
   /**
    * UsersCountOutputType without action
    */
-  export type UsersCountOutputTypeCountPostsArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
+  export type UsersCountOutputTypeCountMoviesArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
     where?: MoviesWhereInput
   }
 
@@ -1176,7 +1176,7 @@ export namespace Prisma {
     password?: boolean
     createdAt?: boolean
     updatedAt?: boolean
-    posts?: boolean | Users$postsArgs<ExtArgs>
+    movies?: boolean | Users$moviesArgs<ExtArgs>
     _count?: boolean | UsersCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["users"]>
 
@@ -1190,7 +1190,7 @@ export namespace Prisma {
   }
 
   export type UsersInclude<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
-    posts?: boolean | Users$postsArgs<ExtArgs>
+    movies?: boolean | Users$moviesArgs<ExtArgs>
     _count?: boolean | UsersCountOutputTypeDefaultArgs<ExtArgs>
   }
 
@@ -1198,7 +1198,7 @@ export namespace Prisma {
   export type $UsersPayload<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
     name: "Users"
     objects: {
-      posts: Prisma.$MoviesPayload<ExtArgs>[]
+      movies: Prisma.$MoviesPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetResult<{
       id: number
@@ -1572,7 +1572,7 @@ export namespace Prisma {
   export interface Prisma__UsersClient<T, Null = never, ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: 'PrismaPromise';
 
-    posts<T extends Users$postsArgs<ExtArgs> = {}>(args?: Subset<T, Users$postsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MoviesPayload<ExtArgs>, T, 'findMany'> | Null>;
+    movies<T extends Users$moviesArgs<ExtArgs> = {}>(args?: Subset<T, Users$moviesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MoviesPayload<ExtArgs>, T, 'findMany'> | Null>;
 
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -1920,9 +1920,9 @@ export namespace Prisma {
 
 
   /**
-   * Users.posts
+   * Users.movies
    */
-  export type Users$postsArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
+  export type Users$moviesArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the Movies
      */
@@ -1970,12 +1970,14 @@ export namespace Prisma {
 
   export type MoviesAvgAggregateOutputType = {
     id: number | null
+    year: number | null
     score: number | null
     usersId: number | null
   }
 
   export type MoviesSumAggregateOutputType = {
     id: number | null
+    year: number | null
     score: number | null
     usersId: number | null
   }
@@ -1983,6 +1985,8 @@ export namespace Prisma {
   export type MoviesMinAggregateOutputType = {
     id: number | null
     title: string | null
+    year: number | null
+    cover_img: string | null
     score: number | null
     createdAt: Date | null
     updatedAt: Date | null
@@ -1992,6 +1996,8 @@ export namespace Prisma {
   export type MoviesMaxAggregateOutputType = {
     id: number | null
     title: string | null
+    year: number | null
+    cover_img: string | null
     score: number | null
     createdAt: Date | null
     updatedAt: Date | null
@@ -2001,7 +2007,10 @@ export namespace Prisma {
   export type MoviesCountAggregateOutputType = {
     id: number
     title: number
+    year: number
+    cover_img: number
     score: number
+    genres: number
     createdAt: number
     updatedAt: number
     usersId: number
@@ -2011,12 +2020,14 @@ export namespace Prisma {
 
   export type MoviesAvgAggregateInputType = {
     id?: true
+    year?: true
     score?: true
     usersId?: true
   }
 
   export type MoviesSumAggregateInputType = {
     id?: true
+    year?: true
     score?: true
     usersId?: true
   }
@@ -2024,6 +2035,8 @@ export namespace Prisma {
   export type MoviesMinAggregateInputType = {
     id?: true
     title?: true
+    year?: true
+    cover_img?: true
     score?: true
     createdAt?: true
     updatedAt?: true
@@ -2033,6 +2046,8 @@ export namespace Prisma {
   export type MoviesMaxAggregateInputType = {
     id?: true
     title?: true
+    year?: true
+    cover_img?: true
     score?: true
     createdAt?: true
     updatedAt?: true
@@ -2042,7 +2057,10 @@ export namespace Prisma {
   export type MoviesCountAggregateInputType = {
     id?: true
     title?: true
+    year?: true
+    cover_img?: true
     score?: true
+    genres?: true
     createdAt?: true
     updatedAt?: true
     usersId?: true
@@ -2138,7 +2156,10 @@ export namespace Prisma {
   export type MoviesGroupByOutputType = {
     id: number
     title: string
+    year: number
+    cover_img: string
     score: number
+    genres: string[]
     createdAt: Date
     updatedAt: Date
     usersId: number | null
@@ -2166,7 +2187,10 @@ export namespace Prisma {
   export type MoviesSelect<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     title?: boolean
+    year?: boolean
+    cover_img?: boolean
     score?: boolean
+    genres?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     usersId?: boolean
@@ -2176,7 +2200,10 @@ export namespace Prisma {
   export type MoviesSelectScalar = {
     id?: boolean
     title?: boolean
+    year?: boolean
+    cover_img?: boolean
     score?: boolean
+    genres?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     usersId?: boolean
@@ -2195,7 +2222,10 @@ export namespace Prisma {
     scalars: $Extensions.GetResult<{
       id: number
       title: string
+      year: number
+      cover_img: string
       score: number
+      genres: string[]
       createdAt: Date
       updatedAt: Date
       usersId: number | null
@@ -2596,7 +2626,10 @@ export namespace Prisma {
   interface MoviesFieldRefs {
     readonly id: FieldRef<"Movies", 'Int'>
     readonly title: FieldRef<"Movies", 'String'>
+    readonly year: FieldRef<"Movies", 'Int'>
+    readonly cover_img: FieldRef<"Movies", 'String'>
     readonly score: FieldRef<"Movies", 'Int'>
+    readonly genres: FieldRef<"Movies", 'String[]'>
     readonly createdAt: FieldRef<"Movies", 'DateTime'>
     readonly updatedAt: FieldRef<"Movies", 'DateTime'>
     readonly usersId: FieldRef<"Movies", 'Int'>
@@ -2972,7 +3005,10 @@ export namespace Prisma {
   export const MoviesScalarFieldEnum: {
     id: 'id',
     title: 'title',
+    year: 'year',
+    cover_img: 'cover_img',
     score: 'score',
+    genres: 'genres',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt',
     usersId: 'usersId'
@@ -3079,7 +3115,7 @@ export namespace Prisma {
     password?: StringFilter<"Users"> | string
     createdAt?: DateTimeFilter<"Users"> | Date | string
     updatedAt?: DateTimeFilter<"Users"> | Date | string
-    posts?: MoviesListRelationFilter
+    movies?: MoviesListRelationFilter
   }
 
   export type UsersOrderByWithRelationInput = {
@@ -3089,7 +3125,7 @@ export namespace Prisma {
     password?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
-    posts?: MoviesOrderByRelationAggregateInput
+    movies?: MoviesOrderByRelationAggregateInput
   }
 
   export type UsersWhereUniqueInput = Prisma.AtLeast<{
@@ -3102,7 +3138,7 @@ export namespace Prisma {
     password?: StringFilter<"Users"> | string
     createdAt?: DateTimeFilter<"Users"> | Date | string
     updatedAt?: DateTimeFilter<"Users"> | Date | string
-    posts?: MoviesListRelationFilter
+    movies?: MoviesListRelationFilter
   }, "id" | "email">
 
   export type UsersOrderByWithAggregationInput = {
@@ -3137,7 +3173,10 @@ export namespace Prisma {
     NOT?: MoviesWhereInput | MoviesWhereInput[]
     id?: IntFilter<"Movies"> | number
     title?: StringFilter<"Movies"> | string
+    year?: IntFilter<"Movies"> | number
+    cover_img?: StringFilter<"Movies"> | string
     score?: IntFilter<"Movies"> | number
+    genres?: StringNullableListFilter<"Movies">
     createdAt?: DateTimeFilter<"Movies"> | Date | string
     updatedAt?: DateTimeFilter<"Movies"> | Date | string
     usersId?: IntNullableFilter<"Movies"> | number | null
@@ -3147,7 +3186,10 @@ export namespace Prisma {
   export type MoviesOrderByWithRelationInput = {
     id?: SortOrder
     title?: SortOrder
+    year?: SortOrder
+    cover_img?: SortOrder
     score?: SortOrder
+    genres?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     usersId?: SortOrderInput | SortOrder
@@ -3160,7 +3202,10 @@ export namespace Prisma {
     OR?: MoviesWhereInput[]
     NOT?: MoviesWhereInput | MoviesWhereInput[]
     title?: StringFilter<"Movies"> | string
+    year?: IntFilter<"Movies"> | number
+    cover_img?: StringFilter<"Movies"> | string
     score?: IntFilter<"Movies"> | number
+    genres?: StringNullableListFilter<"Movies">
     createdAt?: DateTimeFilter<"Movies"> | Date | string
     updatedAt?: DateTimeFilter<"Movies"> | Date | string
     usersId?: IntNullableFilter<"Movies"> | number | null
@@ -3170,7 +3215,10 @@ export namespace Prisma {
   export type MoviesOrderByWithAggregationInput = {
     id?: SortOrder
     title?: SortOrder
+    year?: SortOrder
+    cover_img?: SortOrder
     score?: SortOrder
+    genres?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     usersId?: SortOrderInput | SortOrder
@@ -3187,7 +3235,10 @@ export namespace Prisma {
     NOT?: MoviesScalarWhereWithAggregatesInput | MoviesScalarWhereWithAggregatesInput[]
     id?: IntWithAggregatesFilter<"Movies"> | number
     title?: StringWithAggregatesFilter<"Movies"> | string
+    year?: IntWithAggregatesFilter<"Movies"> | number
+    cover_img?: StringWithAggregatesFilter<"Movies"> | string
     score?: IntWithAggregatesFilter<"Movies"> | number
+    genres?: StringNullableListFilter<"Movies">
     createdAt?: DateTimeWithAggregatesFilter<"Movies"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Movies"> | Date | string
     usersId?: IntNullableWithAggregatesFilter<"Movies"> | number | null
@@ -3199,7 +3250,7 @@ export namespace Prisma {
     password: string
     createdAt?: Date | string
     updatedAt?: Date | string
-    posts?: MoviesCreateNestedManyWithoutUsersInput
+    movies?: MoviesCreateNestedManyWithoutUsersInput
   }
 
   export type UsersUncheckedCreateInput = {
@@ -3209,7 +3260,7 @@ export namespace Prisma {
     password: string
     createdAt?: Date | string
     updatedAt?: Date | string
-    posts?: MoviesUncheckedCreateNestedManyWithoutUsersInput
+    movies?: MoviesUncheckedCreateNestedManyWithoutUsersInput
   }
 
   export type UsersUpdateInput = {
@@ -3218,7 +3269,7 @@ export namespace Prisma {
     password?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    posts?: MoviesUpdateManyWithoutUsersNestedInput
+    movies?: MoviesUpdateManyWithoutUsersNestedInput
   }
 
   export type UsersUncheckedUpdateInput = {
@@ -3228,7 +3279,7 @@ export namespace Prisma {
     password?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    posts?: MoviesUncheckedUpdateManyWithoutUsersNestedInput
+    movies?: MoviesUncheckedUpdateManyWithoutUsersNestedInput
   }
 
   export type UsersCreateManyInput = {
@@ -3259,16 +3310,22 @@ export namespace Prisma {
 
   export type MoviesCreateInput = {
     title: string
+    year: number
+    cover_img: string
     score: number
+    genres?: MoviesCreategenresInput | string[]
     createdAt?: Date | string
     updatedAt?: Date | string
-    Users?: UsersCreateNestedOneWithoutPostsInput
+    Users?: UsersCreateNestedOneWithoutMoviesInput
   }
 
   export type MoviesUncheckedCreateInput = {
     id?: number
     title: string
+    year: number
+    cover_img: string
     score: number
+    genres?: MoviesCreategenresInput | string[]
     createdAt?: Date | string
     updatedAt?: Date | string
     usersId?: number | null
@@ -3276,16 +3333,22 @@ export namespace Prisma {
 
   export type MoviesUpdateInput = {
     title?: StringFieldUpdateOperationsInput | string
+    year?: IntFieldUpdateOperationsInput | number
+    cover_img?: StringFieldUpdateOperationsInput | string
     score?: IntFieldUpdateOperationsInput | number
+    genres?: MoviesUpdategenresInput | string[]
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    Users?: UsersUpdateOneWithoutPostsNestedInput
+    Users?: UsersUpdateOneWithoutMoviesNestedInput
   }
 
   export type MoviesUncheckedUpdateInput = {
     id?: IntFieldUpdateOperationsInput | number
     title?: StringFieldUpdateOperationsInput | string
+    year?: IntFieldUpdateOperationsInput | number
+    cover_img?: StringFieldUpdateOperationsInput | string
     score?: IntFieldUpdateOperationsInput | number
+    genres?: MoviesUpdategenresInput | string[]
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     usersId?: NullableIntFieldUpdateOperationsInput | number | null
@@ -3294,7 +3357,10 @@ export namespace Prisma {
   export type MoviesCreateManyInput = {
     id?: number
     title: string
+    year: number
+    cover_img: string
     score: number
+    genres?: MoviesCreategenresInput | string[]
     createdAt?: Date | string
     updatedAt?: Date | string
     usersId?: number | null
@@ -3302,7 +3368,10 @@ export namespace Prisma {
 
   export type MoviesUpdateManyMutationInput = {
     title?: StringFieldUpdateOperationsInput | string
+    year?: IntFieldUpdateOperationsInput | number
+    cover_img?: StringFieldUpdateOperationsInput | string
     score?: IntFieldUpdateOperationsInput | number
+    genres?: MoviesUpdategenresInput | string[]
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -3310,7 +3379,10 @@ export namespace Prisma {
   export type MoviesUncheckedUpdateManyInput = {
     id?: IntFieldUpdateOperationsInput | number
     title?: StringFieldUpdateOperationsInput | string
+    year?: IntFieldUpdateOperationsInput | number
+    cover_img?: StringFieldUpdateOperationsInput | string
     score?: IntFieldUpdateOperationsInput | number
+    genres?: MoviesUpdategenresInput | string[]
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     usersId?: NullableIntFieldUpdateOperationsInput | number | null
@@ -3446,6 +3518,14 @@ export namespace Prisma {
     _max?: NestedDateTimeFilter<$PrismaModel>
   }
 
+  export type StringNullableListFilter<$PrismaModel = never> = {
+    equals?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    has?: string | StringFieldRefInput<$PrismaModel> | null
+    hasEvery?: string[] | ListStringFieldRefInput<$PrismaModel>
+    hasSome?: string[] | ListStringFieldRefInput<$PrismaModel>
+    isEmpty?: boolean
+  }
+
   export type IntNullableFilter<$PrismaModel = never> = {
     equals?: number | IntFieldRefInput<$PrismaModel> | null
     in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
@@ -3470,7 +3550,10 @@ export namespace Prisma {
   export type MoviesCountOrderByAggregateInput = {
     id?: SortOrder
     title?: SortOrder
+    year?: SortOrder
+    cover_img?: SortOrder
     score?: SortOrder
+    genres?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     usersId?: SortOrder
@@ -3478,6 +3561,7 @@ export namespace Prisma {
 
   export type MoviesAvgOrderByAggregateInput = {
     id?: SortOrder
+    year?: SortOrder
     score?: SortOrder
     usersId?: SortOrder
   }
@@ -3485,6 +3569,8 @@ export namespace Prisma {
   export type MoviesMaxOrderByAggregateInput = {
     id?: SortOrder
     title?: SortOrder
+    year?: SortOrder
+    cover_img?: SortOrder
     score?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -3494,6 +3580,8 @@ export namespace Prisma {
   export type MoviesMinOrderByAggregateInput = {
     id?: SortOrder
     title?: SortOrder
+    year?: SortOrder
+    cover_img?: SortOrder
     score?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -3502,6 +3590,7 @@ export namespace Prisma {
 
   export type MoviesSumOrderByAggregateInput = {
     id?: SortOrder
+    year?: SortOrder
     score?: SortOrder
     usersId?: SortOrder
   }
@@ -3580,20 +3669,29 @@ export namespace Prisma {
     deleteMany?: MoviesScalarWhereInput | MoviesScalarWhereInput[]
   }
 
-  export type UsersCreateNestedOneWithoutPostsInput = {
-    create?: XOR<UsersCreateWithoutPostsInput, UsersUncheckedCreateWithoutPostsInput>
-    connectOrCreate?: UsersCreateOrConnectWithoutPostsInput
+  export type MoviesCreategenresInput = {
+    set: string[]
+  }
+
+  export type UsersCreateNestedOneWithoutMoviesInput = {
+    create?: XOR<UsersCreateWithoutMoviesInput, UsersUncheckedCreateWithoutMoviesInput>
+    connectOrCreate?: UsersCreateOrConnectWithoutMoviesInput
     connect?: UsersWhereUniqueInput
   }
 
-  export type UsersUpdateOneWithoutPostsNestedInput = {
-    create?: XOR<UsersCreateWithoutPostsInput, UsersUncheckedCreateWithoutPostsInput>
-    connectOrCreate?: UsersCreateOrConnectWithoutPostsInput
-    upsert?: UsersUpsertWithoutPostsInput
+  export type MoviesUpdategenresInput = {
+    set?: string[]
+    push?: string | string[]
+  }
+
+  export type UsersUpdateOneWithoutMoviesNestedInput = {
+    create?: XOR<UsersCreateWithoutMoviesInput, UsersUncheckedCreateWithoutMoviesInput>
+    connectOrCreate?: UsersCreateOrConnectWithoutMoviesInput
+    upsert?: UsersUpsertWithoutMoviesInput
     disconnect?: UsersWhereInput | boolean
     delete?: UsersWhereInput | boolean
     connect?: UsersWhereUniqueInput
-    update?: XOR<XOR<UsersUpdateToOneWithWhereWithoutPostsInput, UsersUpdateWithoutPostsInput>, UsersUncheckedUpdateWithoutPostsInput>
+    update?: XOR<XOR<UsersUpdateToOneWithWhereWithoutMoviesInput, UsersUpdateWithoutMoviesInput>, UsersUncheckedUpdateWithoutMoviesInput>
   }
 
   export type NullableIntFieldUpdateOperationsInput = {
@@ -3738,7 +3836,10 @@ export namespace Prisma {
 
   export type MoviesCreateWithoutUsersInput = {
     title: string
+    year: number
+    cover_img: string
     score: number
+    genres?: MoviesCreategenresInput | string[]
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -3746,7 +3847,10 @@ export namespace Prisma {
   export type MoviesUncheckedCreateWithoutUsersInput = {
     id?: number
     title: string
+    year: number
+    cover_img: string
     score: number
+    genres?: MoviesCreategenresInput | string[]
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -3783,13 +3887,16 @@ export namespace Prisma {
     NOT?: MoviesScalarWhereInput | MoviesScalarWhereInput[]
     id?: IntFilter<"Movies"> | number
     title?: StringFilter<"Movies"> | string
+    year?: IntFilter<"Movies"> | number
+    cover_img?: StringFilter<"Movies"> | string
     score?: IntFilter<"Movies"> | number
+    genres?: StringNullableListFilter<"Movies">
     createdAt?: DateTimeFilter<"Movies"> | Date | string
     updatedAt?: DateTimeFilter<"Movies"> | Date | string
     usersId?: IntNullableFilter<"Movies"> | number | null
   }
 
-  export type UsersCreateWithoutPostsInput = {
+  export type UsersCreateWithoutMoviesInput = {
     name: string
     email: string
     password: string
@@ -3797,7 +3904,7 @@ export namespace Prisma {
     updatedAt?: Date | string
   }
 
-  export type UsersUncheckedCreateWithoutPostsInput = {
+  export type UsersUncheckedCreateWithoutMoviesInput = {
     id?: number
     name: string
     email: string
@@ -3806,23 +3913,23 @@ export namespace Prisma {
     updatedAt?: Date | string
   }
 
-  export type UsersCreateOrConnectWithoutPostsInput = {
+  export type UsersCreateOrConnectWithoutMoviesInput = {
     where: UsersWhereUniqueInput
-    create: XOR<UsersCreateWithoutPostsInput, UsersUncheckedCreateWithoutPostsInput>
+    create: XOR<UsersCreateWithoutMoviesInput, UsersUncheckedCreateWithoutMoviesInput>
   }
 
-  export type UsersUpsertWithoutPostsInput = {
-    update: XOR<UsersUpdateWithoutPostsInput, UsersUncheckedUpdateWithoutPostsInput>
-    create: XOR<UsersCreateWithoutPostsInput, UsersUncheckedCreateWithoutPostsInput>
+  export type UsersUpsertWithoutMoviesInput = {
+    update: XOR<UsersUpdateWithoutMoviesInput, UsersUncheckedUpdateWithoutMoviesInput>
+    create: XOR<UsersCreateWithoutMoviesInput, UsersUncheckedCreateWithoutMoviesInput>
     where?: UsersWhereInput
   }
 
-  export type UsersUpdateToOneWithWhereWithoutPostsInput = {
+  export type UsersUpdateToOneWithWhereWithoutMoviesInput = {
     where?: UsersWhereInput
-    data: XOR<UsersUpdateWithoutPostsInput, UsersUncheckedUpdateWithoutPostsInput>
+    data: XOR<UsersUpdateWithoutMoviesInput, UsersUncheckedUpdateWithoutMoviesInput>
   }
 
-  export type UsersUpdateWithoutPostsInput = {
+  export type UsersUpdateWithoutMoviesInput = {
     name?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
@@ -3830,7 +3937,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type UsersUncheckedUpdateWithoutPostsInput = {
+  export type UsersUncheckedUpdateWithoutMoviesInput = {
     id?: IntFieldUpdateOperationsInput | number
     name?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
@@ -3842,14 +3949,20 @@ export namespace Prisma {
   export type MoviesCreateManyUsersInput = {
     id?: number
     title: string
+    year: number
+    cover_img: string
     score: number
+    genres?: MoviesCreategenresInput | string[]
     createdAt?: Date | string
     updatedAt?: Date | string
   }
 
   export type MoviesUpdateWithoutUsersInput = {
     title?: StringFieldUpdateOperationsInput | string
+    year?: IntFieldUpdateOperationsInput | number
+    cover_img?: StringFieldUpdateOperationsInput | string
     score?: IntFieldUpdateOperationsInput | number
+    genres?: MoviesUpdategenresInput | string[]
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -3857,7 +3970,10 @@ export namespace Prisma {
   export type MoviesUncheckedUpdateWithoutUsersInput = {
     id?: IntFieldUpdateOperationsInput | number
     title?: StringFieldUpdateOperationsInput | string
+    year?: IntFieldUpdateOperationsInput | number
+    cover_img?: StringFieldUpdateOperationsInput | string
     score?: IntFieldUpdateOperationsInput | number
+    genres?: MoviesUpdategenresInput | string[]
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -3865,7 +3981,10 @@ export namespace Prisma {
   export type MoviesUncheckedUpdateManyWithoutUsersInput = {
     id?: IntFieldUpdateOperationsInput | number
     title?: StringFieldUpdateOperationsInput | string
+    year?: IntFieldUpdateOperationsInput | number
+    cover_img?: StringFieldUpdateOperationsInput | string
     score?: IntFieldUpdateOperationsInput | number
+    genres?: MoviesUpdategenresInput | string[]
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }

@@ -6,7 +6,7 @@ const DATA_SOURCE = "postgres"
 // process.env.DATA_SOURCE;
 
 type ClientType = {
-    [key: string]: MongoClient | PostgresClient;
+    [key: string]: MongoClient | PostgresClient
 };
 
 export const mongoClient = new MongoClient();
