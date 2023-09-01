@@ -1,18 +1,19 @@
-import { Router, Request, Response } from "express"
-import { addMovie, deleteMovie, getAllMovies, getMovieById, updateMovie } from "../controllers/movies.controllers"
-import { checkMovieValidity } from "../middlewares/checkMovies.middleware"
-
-const moviesRoutes = Router()
+import { Router } from "express";
+import { addMovie, deleteMovie, getAllMovies, getMovieById, updateMovie } from "../controllers/movies.controllers";
+import { checkMovieValidity } from "../middlewares/checkMovies.middleware";
 
 
-moviesRoutes.post("/:userId", addMovie)
+const moviesRoutes = Router();
 
-moviesRoutes.get("/", getAllMovies)
 
-moviesRoutes.get("/:movieId", getMovieById)
+moviesRoutes.post("/:userId", addMovie);
 
-moviesRoutes.put("/:movieId", updateMovie)
+moviesRoutes.get("/", getAllMovies);
 
-moviesRoutes.delete("/:movieId", deleteMovie)
+moviesRoutes.get("/:movieId", getMovieById);
 
-export default moviesRoutes
+moviesRoutes.put("/:movieId", updateMovie);
+
+moviesRoutes.delete("/:movieId", deleteMovie);
+
+export default moviesRoutes;

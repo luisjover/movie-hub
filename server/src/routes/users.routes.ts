@@ -1,17 +1,17 @@
-import { Router, Request, Response } from "express"
-import { createUser, deleteUser, getAllUsers, getUserById, updateUser, } from "../controllers/users.controllers"
+import { Router } from "express";
+import { createUser, deleteUser, getAllUsers, getUserById, updateUser, } from "../controllers/users.controllers";
 
-const usersRoutes = Router()
+const usersRoutes = Router();
 
 
-usersRoutes.post("/", createUser)
+usersRoutes.post("/", createUser);
 
-usersRoutes.get("/", getAllUsers)
+usersRoutes.get("/", getAllUsers);
 
-usersRoutes.get("/:userId", getUserById)
+usersRoutes.get("/:userId", getUserById);
 
-usersRoutes.put("/:userId", updateUser)
+usersRoutes.put("/:userId", updateUser);
 
-usersRoutes.delete("/:userId", deleteUser)
+usersRoutes.delete("/:userId", deleteUser);
 
-export default usersRoutes
+export default usersRoutes;

@@ -4,6 +4,7 @@ import usersRoutes from "./routes/users.routes";
 import moviesRoutes from "./routes/movies.routes";
 import morgan from "morgan";
 import cors from "cors";
+import { checkJwtMiddleware } from "./middlewares/checkJwt.middleware";
 
 // initializations
 const app: Application = express();
@@ -18,8 +19,8 @@ app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
 // routes
-app.use("/users", usersRoutes);
-app.use("/movies", moviesRoutes);
+app.use("/users", checkJwtMiddleware, usersRoutes);
+app.use("/movies", checkJwtMiddleware, moviesRoutes);
 
 
-export default app
+export default app;
