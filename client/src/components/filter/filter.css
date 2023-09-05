@@ -1,0 +1,14 @@
+.library-filter {
+
+    overflow: scroll;
+    display: flex;
+    justify-content: flex-start;
+    gap: 10px;
+    margin: 20px 15px 30px 16px;
+
+
+}
+
+.library-filter::-webkit-scrollbar {
+    display: none;
+}

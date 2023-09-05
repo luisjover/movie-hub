@@ -1,0 +1,13 @@
+.logout-btn {
+    /* transform: translate(-50%, -50%); */
+    border-style: none;
+    width: 20vw;
+    height: 3.5vh;
+    border-radius: 8px;
+    text-align: center;
+    font-style: normal;
+    font-weight: 600;
+    background: #a785fe;
+    color: #000;
+
+}

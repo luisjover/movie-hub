@@ -1,5 +1,6 @@
 import { Router } from "express";
-import { createUser, deleteUser, getAllUsers, getUserById, updateUser, } from "../controllers/users.controllers";
+import { createUser, deleteUser, getAllUsers, getUserByEmail, updateUser, } from "../controllers/users.controllers";
+import { checkJwtMiddleware } from "../middlewares/checkJwt.middleware";
 
 const usersRoutes = Router();
 
@@ -8,10 +9,10 @@ usersRoutes.post("/", createUser);
 
 usersRoutes.get("/", getAllUsers);
 
-usersRoutes.get("/:userId", getUserById);
+usersRoutes.get("/:userEmail", getUserByEmail);
 
-usersRoutes.put("/:userId", updateUser);
+usersRoutes.put("/:userEmail", updateUser);
 
-usersRoutes.delete("/:userId", deleteUser);
+usersRoutes.delete("/:userEmail", deleteUser);
 
 export default usersRoutes;

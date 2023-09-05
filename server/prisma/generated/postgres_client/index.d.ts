@@ -23,6 +23,11 @@ export type Users = $Result.DefaultSelection<Prisma.$UsersPayload>
  * 
  */
 export type Movies = $Result.DefaultSelection<Prisma.$MoviesPayload>
+/**
+ * Model Genres
+ * 
+ */
+export type Genres = $Result.DefaultSelection<Prisma.$GenresPayload>
 
 /**
  * ##  Prisma Client ʲˢ
@@ -165,6 +170,16 @@ export class PrismaClient<
     * ```
     */
   get movies(): Prisma.MoviesDelegate<ExtArgs>;
+
+  /**
+   * `prisma.genres`: Exposes CRUD operations for the **Genres** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Genres
+    * const genres = await prisma.genres.findMany()
+    * ```
+    */
+  get genres(): Prisma.GenresDelegate<ExtArgs>;
 }
 
 export namespace Prisma {
@@ -636,7 +651,8 @@ export namespace Prisma {
 
   export const ModelName: {
     Users: 'Users',
-    Movies: 'Movies'
+    Movies: 'Movies',
+    Genres: 'Genres'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -653,7 +669,7 @@ export namespace Prisma {
 
   export type TypeMap<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
     meta: {
-      modelProps: 'users' | 'movies'
+      modelProps: 'users' | 'movies' | 'genres'
       txIsolationLevel: Prisma.TransactionIsolationLevel
     },
     model: {
@@ -786,6 +802,72 @@ export namespace Prisma {
           count: {
             args: Prisma.MoviesCountArgs<ExtArgs>,
             result: $Utils.Optional<MoviesCountAggregateOutputType> | number
+          }
+        }
+      }
+      Genres: {
+        payload: Prisma.$GenresPayload<ExtArgs>
+        fields: Prisma.GenresFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.GenresFindUniqueArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$GenresPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.GenresFindUniqueOrThrowArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$GenresPayload>
+          }
+          findFirst: {
+            args: Prisma.GenresFindFirstArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$GenresPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.GenresFindFirstOrThrowArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$GenresPayload>
+          }
+          findMany: {
+            args: Prisma.GenresFindManyArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$GenresPayload>[]
+          }
+          create: {
+            args: Prisma.GenresCreateArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$GenresPayload>
+          }
+          createMany: {
+            args: Prisma.GenresCreateManyArgs<ExtArgs>,
+            result: Prisma.BatchPayload
+          }
+          delete: {
+            args: Prisma.GenresDeleteArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$GenresPayload>
+          }
+          update: {
+            args: Prisma.GenresUpdateArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$GenresPayload>
+          }
+          deleteMany: {
+            args: Prisma.GenresDeleteManyArgs<ExtArgs>,
+            result: Prisma.BatchPayload
+          }
+          updateMany: {
+            args: Prisma.GenresUpdateManyArgs<ExtArgs>,
+            result: Prisma.BatchPayload
+          }
+          upsert: {
+            args: Prisma.GenresUpsertArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$GenresPayload>
+          }
+          aggregate: {
+            args: Prisma.GenresAggregateArgs<ExtArgs>,
+            result: $Utils.Optional<AggregateGenres>
+          }
+          groupBy: {
+            args: Prisma.GenresGroupByArgs<ExtArgs>,
+            result: $Utils.Optional<GenresGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.GenresCountArgs<ExtArgs>,
+            result: $Utils.Optional<GenresCountAggregateOutputType> | number
           }
         }
       }
@@ -967,6 +1049,40 @@ export namespace Prisma {
 
 
   /**
+   * Count Type GenresCountOutputType
+   */
+
+  export type GenresCountOutputType = {
+    movies: number
+  }
+
+  export type GenresCountOutputTypeSelect<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
+    movies?: boolean | GenresCountOutputTypeCountMoviesArgs
+  }
+
+  // Custom InputTypes
+
+  /**
+   * GenresCountOutputType without action
+   */
+  export type GenresCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the GenresCountOutputType
+     */
+    select?: GenresCountOutputTypeSelect<ExtArgs> | null
+  }
+
+
+  /**
+   * GenresCountOutputType without action
+   */
+  export type GenresCountOutputTypeCountMoviesArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
+    where?: MoviesWhereInput
+  }
+
+
+
+  /**
    * Models
    */
 
@@ -994,7 +1110,6 @@ export namespace Prisma {
     id: number | null
     name: string | null
     email: string | null
-    password: string | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -1003,7 +1118,6 @@ export namespace Prisma {
     id: number | null
     name: string | null
     email: string | null
-    password: string | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -1012,7 +1126,6 @@ export namespace Prisma {
     id: number
     name: number
     email: number
-    password: number
     createdAt: number
     updatedAt: number
     _all: number
@@ -1031,7 +1144,6 @@ export namespace Prisma {
     id?: true
     name?: true
     email?: true
-    password?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -1040,7 +1152,6 @@ export namespace Prisma {
     id?: true
     name?: true
     email?: true
-    password?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -1049,7 +1160,6 @@ export namespace Prisma {
     id?: true
     name?: true
     email?: true
-    password?: true
     createdAt?: true
     updatedAt?: true
     _all?: true
@@ -1145,7 +1255,6 @@ export namespace Prisma {
     id: number
     name: string
     email: string
-    password: string
     createdAt: Date
     updatedAt: Date
     _count: UsersCountAggregateOutputType | null
@@ -1173,7 +1282,6 @@ export namespace Prisma {
     id?: boolean
     name?: boolean
     email?: boolean
-    password?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     movies?: boolean | Users$moviesArgs<ExtArgs>
@@ -1184,7 +1292,6 @@ export namespace Prisma {
     id?: boolean
     name?: boolean
     email?: boolean
-    password?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }
@@ -1204,7 +1311,6 @@ export namespace Prisma {
       id: number
       name: string
       email: string
-      password: string
       createdAt: Date
       updatedAt: Date
     }, ExtArgs["result"]["users"]>
@@ -1605,7 +1711,6 @@ export namespace Prisma {
     readonly id: FieldRef<"Users", 'Int'>
     readonly name: FieldRef<"Users", 'String'>
     readonly email: FieldRef<"Users", 'String'>
-    readonly password: FieldRef<"Users", 'String'>
     readonly createdAt: FieldRef<"Users", 'DateTime'>
     readonly updatedAt: FieldRef<"Users", 'DateTime'>
   }
@@ -1991,6 +2096,7 @@ export namespace Prisma {
     createdAt: Date | null
     updatedAt: Date | null
     usersId: number | null
+    genresName: string | null
   }
 
   export type MoviesMaxAggregateOutputType = {
@@ -2002,6 +2108,7 @@ export namespace Prisma {
     createdAt: Date | null
     updatedAt: Date | null
     usersId: number | null
+    genresName: string | null
   }
 
   export type MoviesCountAggregateOutputType = {
@@ -2014,6 +2121,7 @@ export namespace Prisma {
     createdAt: number
     updatedAt: number
     usersId: number
+    genresName: number
     _all: number
   }
 
@@ -2041,6 +2149,7 @@ export namespace Prisma {
     createdAt?: true
     updatedAt?: true
     usersId?: true
+    genresName?: true
   }
 
   export type MoviesMaxAggregateInputType = {
@@ -2052,6 +2161,7 @@ export namespace Prisma {
     createdAt?: true
     updatedAt?: true
     usersId?: true
+    genresName?: true
   }
 
   export type MoviesCountAggregateInputType = {
@@ -2064,6 +2174,7 @@ export namespace Prisma {
     createdAt?: true
     updatedAt?: true
     usersId?: true
+    genresName?: true
     _all?: true
   }
 
@@ -2163,6 +2274,7 @@ export namespace Prisma {
     createdAt: Date
     updatedAt: Date
     usersId: number | null
+    genresName: string
     _count: MoviesCountAggregateOutputType | null
     _avg: MoviesAvgAggregateOutputType | null
     _sum: MoviesSumAggregateOutputType | null
@@ -2194,7 +2306,9 @@ export namespace Prisma {
     createdAt?: boolean
     updatedAt?: boolean
     usersId?: boolean
+    genresName?: boolean
     Users?: boolean | Movies$UsersArgs<ExtArgs>
+    Genres?: boolean | Movies$GenresArgs<ExtArgs>
   }, ExtArgs["result"]["movies"]>
 
   export type MoviesSelectScalar = {
@@ -2207,10 +2321,12 @@ export namespace Prisma {
     createdAt?: boolean
     updatedAt?: boolean
     usersId?: boolean
+    genresName?: boolean
   }
 
   export type MoviesInclude<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
     Users?: boolean | Movies$UsersArgs<ExtArgs>
+    Genres?: boolean | Movies$GenresArgs<ExtArgs>
   }
 
 
@@ -2218,6 +2334,7 @@ export namespace Prisma {
     name: "Movies"
     objects: {
       Users: Prisma.$UsersPayload<ExtArgs> | null
+      Genres: Prisma.$GenresPayload<ExtArgs> | null
     }
     scalars: $Extensions.GetResult<{
       id: number
@@ -2229,6 +2346,7 @@ export namespace Prisma {
       createdAt: Date
       updatedAt: Date
       usersId: number | null
+      genresName: string
     }, ExtArgs["result"]["movies"]>
     composites: {}
   }
@@ -2596,6 +2714,8 @@ export namespace Prisma {
 
     Users<T extends Movies$UsersArgs<ExtArgs> = {}>(args?: Subset<T, Movies$UsersArgs<ExtArgs>>): Prisma__UsersClient<$Result.GetResult<Prisma.$UsersPayload<ExtArgs>, T, 'findUniqueOrThrow'> | null, null, ExtArgs>;
 
+    Genres<T extends Movies$GenresArgs<ExtArgs> = {}>(args?: Subset<T, Movies$GenresArgs<ExtArgs>>): Prisma__GenresClient<$Result.GetResult<Prisma.$GenresPayload<ExtArgs>, T, 'findUniqueOrThrow'> | null, null, ExtArgs>;
+
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2628,11 +2748,12 @@ export namespace Prisma {
     readonly title: FieldRef<"Movies", 'String'>
     readonly year: FieldRef<"Movies", 'Int'>
     readonly cover_img: FieldRef<"Movies", 'String'>
-    readonly score: FieldRef<"Movies", 'Int'>
+    readonly score: FieldRef<"Movies", 'Float'>
     readonly genres: FieldRef<"Movies", 'String[]'>
     readonly createdAt: FieldRef<"Movies", 'DateTime'>
     readonly updatedAt: FieldRef<"Movies", 'DateTime'>
     readonly usersId: FieldRef<"Movies", 'Int'>
+    readonly genresName: FieldRef<"Movies", 'String'>
   }
     
 
@@ -2961,6 +3082,22 @@ export namespace Prisma {
 
 
   /**
+   * Movies.Genres
+   */
+  export type Movies$GenresArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Genres
+     */
+    select?: GenresSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: GenresInclude<ExtArgs> | null
+    where?: GenresWhereInput
+  }
+
+
+  /**
    * Movies without action
    */
   export type MoviesDefaultArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
@@ -2972,6 +3109,970 @@ export namespace Prisma {
      * Choose, which related nodes to fetch as well.
      */
     include?: MoviesInclude<ExtArgs> | null
+  }
+
+
+
+  /**
+   * Model Genres
+   */
+
+  export type AggregateGenres = {
+    _count: GenresCountAggregateOutputType | null
+    _avg: GenresAvgAggregateOutputType | null
+    _sum: GenresSumAggregateOutputType | null
+    _min: GenresMinAggregateOutputType | null
+    _max: GenresMaxAggregateOutputType | null
+  }
+
+  export type GenresAvgAggregateOutputType = {
+    id: number | null
+  }
+
+  export type GenresSumAggregateOutputType = {
+    id: number | null
+  }
+
+  export type GenresMinAggregateOutputType = {
+    id: number | null
+    name: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type GenresMaxAggregateOutputType = {
+    id: number | null
+    name: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type GenresCountAggregateOutputType = {
+    id: number
+    name: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type GenresAvgAggregateInputType = {
+    id?: true
+  }
+
+  export type GenresSumAggregateInputType = {
+    id?: true
+  }
+
+  export type GenresMinAggregateInputType = {
+    id?: true
+    name?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type GenresMaxAggregateInputType = {
+    id?: true
+    name?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type GenresCountAggregateInputType = {
+    id?: true
+    name?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type GenresAggregateArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Genres to aggregate.
+     */
+    where?: GenresWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Genres to fetch.
+     */
+    orderBy?: GenresOrderByWithRelationInput | GenresOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: GenresWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Genres from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Genres.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned Genres
+    **/
+    _count?: true | GenresCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: GenresAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: GenresSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: GenresMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: GenresMaxAggregateInputType
+  }
+
+  export type GetGenresAggregateType<T extends GenresAggregateArgs> = {
+        [P in keyof T & keyof AggregateGenres]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateGenres[P]>
+      : GetScalarType<T[P], AggregateGenres[P]>
+  }
+
+
+
+
+  export type GenresGroupByArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
+    where?: GenresWhereInput
+    orderBy?: GenresOrderByWithAggregationInput | GenresOrderByWithAggregationInput[]
+    by: GenresScalarFieldEnum[] | GenresScalarFieldEnum
+    having?: GenresScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: GenresCountAggregateInputType | true
+    _avg?: GenresAvgAggregateInputType
+    _sum?: GenresSumAggregateInputType
+    _min?: GenresMinAggregateInputType
+    _max?: GenresMaxAggregateInputType
+  }
+
+  export type GenresGroupByOutputType = {
+    id: number
+    name: string
+    createdAt: Date
+    updatedAt: Date
+    _count: GenresCountAggregateOutputType | null
+    _avg: GenresAvgAggregateOutputType | null
+    _sum: GenresSumAggregateOutputType | null
+    _min: GenresMinAggregateOutputType | null
+    _max: GenresMaxAggregateOutputType | null
+  }
+
+  type GetGenresGroupByPayload<T extends GenresGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<GenresGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof GenresGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], GenresGroupByOutputType[P]>
+            : GetScalarType<T[P], GenresGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type GenresSelect<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    name?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    movies?: boolean | Genres$moviesArgs<ExtArgs>
+    _count?: boolean | GenresCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["genres"]>
+
+  export type GenresSelectScalar = {
+    id?: boolean
+    name?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type GenresInclude<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
+    movies?: boolean | Genres$moviesArgs<ExtArgs>
+    _count?: boolean | GenresCountOutputTypeDefaultArgs<ExtArgs>
+  }
+
+
+  export type $GenresPayload<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
+    name: "Genres"
+    objects: {
+      movies: Prisma.$MoviesPayload<ExtArgs>[]
+    }
+    scalars: $Extensions.GetResult<{
+      id: number
+      name: string
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["genres"]>
+    composites: {}
+  }
+
+
+  type GenresGetPayload<S extends boolean | null | undefined | GenresDefaultArgs> = $Result.GetResult<Prisma.$GenresPayload, S>
+
+  type GenresCountArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = 
+    Omit<GenresFindManyArgs, 'select' | 'include'> & {
+      select?: GenresCountAggregateInputType | true
+    }
+
+  export interface GenresDelegate<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Genres'], meta: { name: 'Genres' } }
+    /**
+     * Find zero or one Genres that matches the filter.
+     * @param {GenresFindUniqueArgs} args - Arguments to find a Genres
+     * @example
+     * // Get one Genres
+     * const genres = await prisma.genres.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findUnique<T extends GenresFindUniqueArgs<ExtArgs>>(
+      args: SelectSubset<T, GenresFindUniqueArgs<ExtArgs>>
+    ): Prisma__GenresClient<$Result.GetResult<Prisma.$GenresPayload<ExtArgs>, T, 'findUnique'> | null, null, ExtArgs>
+
+    /**
+     * Find one Genres that matches the filter or throw an error  with `error.code='P2025'` 
+     *     if no matches were found.
+     * @param {GenresFindUniqueOrThrowArgs} args - Arguments to find a Genres
+     * @example
+     * // Get one Genres
+     * const genres = await prisma.genres.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findUniqueOrThrow<T extends GenresFindUniqueOrThrowArgs<ExtArgs>>(
+      args?: SelectSubset<T, GenresFindUniqueOrThrowArgs<ExtArgs>>
+    ): Prisma__GenresClient<$Result.GetResult<Prisma.$GenresPayload<ExtArgs>, T, 'findUniqueOrThrow'>, never, ExtArgs>
+
+    /**
+     * Find the first Genres that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {GenresFindFirstArgs} args - Arguments to find a Genres
+     * @example
+     * // Get one Genres
+     * const genres = await prisma.genres.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findFirst<T extends GenresFindFirstArgs<ExtArgs>>(
+      args?: SelectSubset<T, GenresFindFirstArgs<ExtArgs>>
+    ): Prisma__GenresClient<$Result.GetResult<Prisma.$GenresPayload<ExtArgs>, T, 'findFirst'> | null, null, ExtArgs>
+
+    /**
+     * Find the first Genres that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {GenresFindFirstOrThrowArgs} args - Arguments to find a Genres
+     * @example
+     * // Get one Genres
+     * const genres = await prisma.genres.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findFirstOrThrow<T extends GenresFindFirstOrThrowArgs<ExtArgs>>(
+      args?: SelectSubset<T, GenresFindFirstOrThrowArgs<ExtArgs>>
+    ): Prisma__GenresClient<$Result.GetResult<Prisma.$GenresPayload<ExtArgs>, T, 'findFirstOrThrow'>, never, ExtArgs>
+
+    /**
+     * Find zero or more Genres that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {GenresFindManyArgs=} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Genres
+     * const genres = await prisma.genres.findMany()
+     * 
+     * // Get first 10 Genres
+     * const genres = await prisma.genres.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const genresWithIdOnly = await prisma.genres.findMany({ select: { id: true } })
+     * 
+    **/
+    findMany<T extends GenresFindManyArgs<ExtArgs>>(
+      args?: SelectSubset<T, GenresFindManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<$Result.GetResult<Prisma.$GenresPayload<ExtArgs>, T, 'findMany'>>
+
+    /**
+     * Create a Genres.
+     * @param {GenresCreateArgs} args - Arguments to create a Genres.
+     * @example
+     * // Create one Genres
+     * const Genres = await prisma.genres.create({
+     *   data: {
+     *     // ... data to create a Genres
+     *   }
+     * })
+     * 
+    **/
+    create<T extends GenresCreateArgs<ExtArgs>>(
+      args: SelectSubset<T, GenresCreateArgs<ExtArgs>>
+    ): Prisma__GenresClient<$Result.GetResult<Prisma.$GenresPayload<ExtArgs>, T, 'create'>, never, ExtArgs>
+
+    /**
+     * Create many Genres.
+     *     @param {GenresCreateManyArgs} args - Arguments to create many Genres.
+     *     @example
+     *     // Create many Genres
+     *     const genres = await prisma.genres.createMany({
+     *       data: {
+     *         // ... provide data here
+     *       }
+     *     })
+     *     
+    **/
+    createMany<T extends GenresCreateManyArgs<ExtArgs>>(
+      args?: SelectSubset<T, GenresCreateManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Delete a Genres.
+     * @param {GenresDeleteArgs} args - Arguments to delete one Genres.
+     * @example
+     * // Delete one Genres
+     * const Genres = await prisma.genres.delete({
+     *   where: {
+     *     // ... filter to delete one Genres
+     *   }
+     * })
+     * 
+    **/
+    delete<T extends GenresDeleteArgs<ExtArgs>>(
+      args: SelectSubset<T, GenresDeleteArgs<ExtArgs>>
+    ): Prisma__GenresClient<$Result.GetResult<Prisma.$GenresPayload<ExtArgs>, T, 'delete'>, never, ExtArgs>
+
+    /**
+     * Update one Genres.
+     * @param {GenresUpdateArgs} args - Arguments to update one Genres.
+     * @example
+     * // Update one Genres
+     * const genres = await prisma.genres.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+    **/
+    update<T extends GenresUpdateArgs<ExtArgs>>(
+      args: SelectSubset<T, GenresUpdateArgs<ExtArgs>>
+    ): Prisma__GenresClient<$Result.GetResult<Prisma.$GenresPayload<ExtArgs>, T, 'update'>, never, ExtArgs>
+
+    /**
+     * Delete zero or more Genres.
+     * @param {GenresDeleteManyArgs} args - Arguments to filter Genres to delete.
+     * @example
+     * // Delete a few Genres
+     * const { count } = await prisma.genres.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+    **/
+    deleteMany<T extends GenresDeleteManyArgs<ExtArgs>>(
+      args?: SelectSubset<T, GenresDeleteManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Genres.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {GenresUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Genres
+     * const genres = await prisma.genres.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+    **/
+    updateMany<T extends GenresUpdateManyArgs<ExtArgs>>(
+      args: SelectSubset<T, GenresUpdateManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one Genres.
+     * @param {GenresUpsertArgs} args - Arguments to update or create a Genres.
+     * @example
+     * // Update or create a Genres
+     * const genres = await prisma.genres.upsert({
+     *   create: {
+     *     // ... data to create a Genres
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Genres we want to update
+     *   }
+     * })
+    **/
+    upsert<T extends GenresUpsertArgs<ExtArgs>>(
+      args: SelectSubset<T, GenresUpsertArgs<ExtArgs>>
+    ): Prisma__GenresClient<$Result.GetResult<Prisma.$GenresPayload<ExtArgs>, T, 'upsert'>, never, ExtArgs>
+
+    /**
+     * Count the number of Genres.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {GenresCountArgs} args - Arguments to filter Genres to count.
+     * @example
+     * // Count the number of Genres
+     * const count = await prisma.genres.count({
+     *   where: {
+     *     // ... the filter for the Genres we want to count
+     *   }
+     * })
+    **/
+    count<T extends GenresCountArgs>(
+      args?: Subset<T, GenresCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], GenresCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Genres.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {GenresAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends GenresAggregateArgs>(args: Subset<T, GenresAggregateArgs>): Prisma.PrismaPromise<GetGenresAggregateType<T>>
+
+    /**
+     * Group by Genres.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {GenresGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends GenresGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: GenresGroupByArgs['orderBy'] }
+        : { orderBy?: GenresGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, GenresGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetGenresGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the Genres model
+   */
+  readonly fields: GenresFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for Genres.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__GenresClient<T, Null = never, ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: 'PrismaPromise';
+
+    movies<T extends Genres$moviesArgs<ExtArgs> = {}>(args?: Subset<T, Genres$moviesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MoviesPayload<ExtArgs>, T, 'findMany'> | Null>;
+
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>;
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>;
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>;
+  }
+
+
+
+  /**
+   * Fields of the Genres model
+   */ 
+  interface GenresFieldRefs {
+    readonly id: FieldRef<"Genres", 'Int'>
+    readonly name: FieldRef<"Genres", 'String'>
+    readonly createdAt: FieldRef<"Genres", 'DateTime'>
+    readonly updatedAt: FieldRef<"Genres", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+
+  /**
+   * Genres findUnique
+   */
+  export type GenresFindUniqueArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Genres
+     */
+    select?: GenresSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: GenresInclude<ExtArgs> | null
+    /**
+     * Filter, which Genres to fetch.
+     */
+    where: GenresWhereUniqueInput
+  }
+
+
+  /**
+   * Genres findUniqueOrThrow
+   */
+  export type GenresFindUniqueOrThrowArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Genres
+     */
+    select?: GenresSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: GenresInclude<ExtArgs> | null
+    /**
+     * Filter, which Genres to fetch.
+     */
+    where: GenresWhereUniqueInput
+  }
+
+
+  /**
+   * Genres findFirst
+   */
+  export type GenresFindFirstArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Genres
+     */
+    select?: GenresSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: GenresInclude<ExtArgs> | null
+    /**
+     * Filter, which Genres to fetch.
+     */
+    where?: GenresWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Genres to fetch.
+     */
+    orderBy?: GenresOrderByWithRelationInput | GenresOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Genres.
+     */
+    cursor?: GenresWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Genres from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Genres.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Genres.
+     */
+    distinct?: GenresScalarFieldEnum | GenresScalarFieldEnum[]
+  }
+
+
+  /**
+   * Genres findFirstOrThrow
+   */
+  export type GenresFindFirstOrThrowArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Genres
+     */
+    select?: GenresSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: GenresInclude<ExtArgs> | null
+    /**
+     * Filter, which Genres to fetch.
+     */
+    where?: GenresWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Genres to fetch.
+     */
+    orderBy?: GenresOrderByWithRelationInput | GenresOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Genres.
+     */
+    cursor?: GenresWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Genres from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Genres.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Genres.
+     */
+    distinct?: GenresScalarFieldEnum | GenresScalarFieldEnum[]
+  }
+
+
+  /**
+   * Genres findMany
+   */
+  export type GenresFindManyArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Genres
+     */
+    select?: GenresSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: GenresInclude<ExtArgs> | null
+    /**
+     * Filter, which Genres to fetch.
+     */
+    where?: GenresWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Genres to fetch.
+     */
+    orderBy?: GenresOrderByWithRelationInput | GenresOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing Genres.
+     */
+    cursor?: GenresWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Genres from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Genres.
+     */
+    skip?: number
+    distinct?: GenresScalarFieldEnum | GenresScalarFieldEnum[]
+  }
+
+
+  /**
+   * Genres create
+   */
+  export type GenresCreateArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Genres
+     */
+    select?: GenresSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: GenresInclude<ExtArgs> | null
+    /**
+     * The data needed to create a Genres.
+     */
+    data: XOR<GenresCreateInput, GenresUncheckedCreateInput>
+  }
+
+
+  /**
+   * Genres createMany
+   */
+  export type GenresCreateManyArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many Genres.
+     */
+    data: GenresCreateManyInput | GenresCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+
+  /**
+   * Genres update
+   */
+  export type GenresUpdateArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Genres
+     */
+    select?: GenresSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: GenresInclude<ExtArgs> | null
+    /**
+     * The data needed to update a Genres.
+     */
+    data: XOR<GenresUpdateInput, GenresUncheckedUpdateInput>
+    /**
+     * Choose, which Genres to update.
+     */
+    where: GenresWhereUniqueInput
+  }
+
+
+  /**
+   * Genres updateMany
+   */
+  export type GenresUpdateManyArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update Genres.
+     */
+    data: XOR<GenresUpdateManyMutationInput, GenresUncheckedUpdateManyInput>
+    /**
+     * Filter which Genres to update
+     */
+    where?: GenresWhereInput
+  }
+
+
+  /**
+   * Genres upsert
+   */
+  export type GenresUpsertArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Genres
+     */
+    select?: GenresSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: GenresInclude<ExtArgs> | null
+    /**
+     * The filter to search for the Genres to update in case it exists.
+     */
+    where: GenresWhereUniqueInput
+    /**
+     * In case the Genres found by the `where` argument doesn't exist, create a new Genres with this data.
+     */
+    create: XOR<GenresCreateInput, GenresUncheckedCreateInput>
+    /**
+     * In case the Genres was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<GenresUpdateInput, GenresUncheckedUpdateInput>
+  }
+
+
+  /**
+   * Genres delete
+   */
+  export type GenresDeleteArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Genres
+     */
+    select?: GenresSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: GenresInclude<ExtArgs> | null
+    /**
+     * Filter which Genres to delete.
+     */
+    where: GenresWhereUniqueInput
+  }
+
+
+  /**
+   * Genres deleteMany
+   */
+  export type GenresDeleteManyArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Genres to delete
+     */
+    where?: GenresWhereInput
+  }
+
+
+  /**
+   * Genres.movies
+   */
+  export type Genres$moviesArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Movies
+     */
+    select?: MoviesSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: MoviesInclude<ExtArgs> | null
+    where?: MoviesWhereInput
+    orderBy?: MoviesOrderByWithRelationInput | MoviesOrderByWithRelationInput[]
+    cursor?: MoviesWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: MoviesScalarFieldEnum | MoviesScalarFieldEnum[]
+  }
+
+
+  /**
+   * Genres without action
+   */
+  export type GenresDefaultArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Genres
+     */
+    select?: GenresSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: GenresInclude<ExtArgs> | null
   }
 
 
@@ -2994,7 +4095,6 @@ export namespace Prisma {
     id: 'id',
     name: 'name',
     email: 'email',
-    password: 'password',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt'
   };
@@ -3011,10 +4111,21 @@ export namespace Prisma {
     genres: 'genres',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt',
-    usersId: 'usersId'
+    usersId: 'usersId',
+    genresName: 'genresName'
   };
 
   export type MoviesScalarFieldEnum = (typeof MoviesScalarFieldEnum)[keyof typeof MoviesScalarFieldEnum]
+
+
+  export const GenresScalarFieldEnum: {
+    id: 'id',
+    name: 'name',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type GenresScalarFieldEnum = (typeof GenresScalarFieldEnum)[keyof typeof GenresScalarFieldEnum]
 
 
   export const SortOrder: {
@@ -3112,7 +4223,6 @@ export namespace Prisma {
     id?: IntFilter<"Users"> | number
     name?: StringFilter<"Users"> | string
     email?: StringFilter<"Users"> | string
-    password?: StringFilter<"Users"> | string
     createdAt?: DateTimeFilter<"Users"> | Date | string
     updatedAt?: DateTimeFilter<"Users"> | Date | string
     movies?: MoviesListRelationFilter
@@ -3122,7 +4232,6 @@ export namespace Prisma {
     id?: SortOrder
     name?: SortOrder
     email?: SortOrder
-    password?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     movies?: MoviesOrderByRelationAggregateInput
@@ -3135,7 +4244,6 @@ export namespace Prisma {
     OR?: UsersWhereInput[]
     NOT?: UsersWhereInput | UsersWhereInput[]
     name?: StringFilter<"Users"> | string
-    password?: StringFilter<"Users"> | string
     createdAt?: DateTimeFilter<"Users"> | Date | string
     updatedAt?: DateTimeFilter<"Users"> | Date | string
     movies?: MoviesListRelationFilter
@@ -3145,7 +4253,6 @@ export namespace Prisma {
     id?: SortOrder
     name?: SortOrder
     email?: SortOrder
-    password?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     _count?: UsersCountOrderByAggregateInput
@@ -3162,7 +4269,6 @@ export namespace Prisma {
     id?: IntWithAggregatesFilter<"Users"> | number
     name?: StringWithAggregatesFilter<"Users"> | string
     email?: StringWithAggregatesFilter<"Users"> | string
-    password?: StringWithAggregatesFilter<"Users"> | string
     createdAt?: DateTimeWithAggregatesFilter<"Users"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Users"> | Date | string
   }
@@ -3175,12 +4281,14 @@ export namespace Prisma {
     title?: StringFilter<"Movies"> | string
     year?: IntFilter<"Movies"> | number
     cover_img?: StringFilter<"Movies"> | string
-    score?: IntFilter<"Movies"> | number
+    score?: FloatFilter<"Movies"> | number
     genres?: StringNullableListFilter<"Movies">
     createdAt?: DateTimeFilter<"Movies"> | Date | string
     updatedAt?: DateTimeFilter<"Movies"> | Date | string
     usersId?: IntNullableFilter<"Movies"> | number | null
+    genresName?: StringFilter<"Movies"> | string
     Users?: XOR<UsersNullableRelationFilter, UsersWhereInput> | null
+    Genres?: XOR<GenresNullableRelationFilter, GenresWhereInput> | null
   }
 
   export type MoviesOrderByWithRelationInput = {
@@ -3193,7 +4301,9 @@ export namespace Prisma {
     createdAt?: SortOrder
     updatedAt?: SortOrder
     usersId?: SortOrderInput | SortOrder
+    genresName?: SortOrder
     Users?: UsersOrderByWithRelationInput
+    Genres?: GenresOrderByWithRelationInput
   }
 
   export type MoviesWhereUniqueInput = Prisma.AtLeast<{
@@ -3204,12 +4314,14 @@ export namespace Prisma {
     title?: StringFilter<"Movies"> | string
     year?: IntFilter<"Movies"> | number
     cover_img?: StringFilter<"Movies"> | string
-    score?: IntFilter<"Movies"> | number
+    score?: FloatFilter<"Movies"> | number
     genres?: StringNullableListFilter<"Movies">
     createdAt?: DateTimeFilter<"Movies"> | Date | string
     updatedAt?: DateTimeFilter<"Movies"> | Date | string
     usersId?: IntNullableFilter<"Movies"> | number | null
+    genresName?: StringFilter<"Movies"> | string
     Users?: XOR<UsersNullableRelationFilter, UsersWhereInput> | null
+    Genres?: XOR<GenresNullableRelationFilter, GenresWhereInput> | null
   }, "id">
 
   export type MoviesOrderByWithAggregationInput = {
@@ -3222,6 +4334,7 @@ export namespace Prisma {
     createdAt?: SortOrder
     updatedAt?: SortOrder
     usersId?: SortOrderInput | SortOrder
+    genresName?: SortOrder
     _count?: MoviesCountOrderByAggregateInput
     _avg?: MoviesAvgOrderByAggregateInput
     _max?: MoviesMaxOrderByAggregateInput
@@ -3237,17 +4350,69 @@ export namespace Prisma {
     title?: StringWithAggregatesFilter<"Movies"> | string
     year?: IntWithAggregatesFilter<"Movies"> | number
     cover_img?: StringWithAggregatesFilter<"Movies"> | string
-    score?: IntWithAggregatesFilter<"Movies"> | number
+    score?: FloatWithAggregatesFilter<"Movies"> | number
     genres?: StringNullableListFilter<"Movies">
     createdAt?: DateTimeWithAggregatesFilter<"Movies"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Movies"> | Date | string
     usersId?: IntNullableWithAggregatesFilter<"Movies"> | number | null
+    genresName?: StringWithAggregatesFilter<"Movies"> | string
+  }
+
+  export type GenresWhereInput = {
+    AND?: GenresWhereInput | GenresWhereInput[]
+    OR?: GenresWhereInput[]
+    NOT?: GenresWhereInput | GenresWhereInput[]
+    id?: IntFilter<"Genres"> | number
+    name?: StringFilter<"Genres"> | string
+    createdAt?: DateTimeFilter<"Genres"> | Date | string
+    updatedAt?: DateTimeFilter<"Genres"> | Date | string
+    movies?: MoviesListRelationFilter
+  }
+
+  export type GenresOrderByWithRelationInput = {
+    id?: SortOrder
+    name?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    movies?: MoviesOrderByRelationAggregateInput
+  }
+
+  export type GenresWhereUniqueInput = Prisma.AtLeast<{
+    id?: number
+    name?: string
+    AND?: GenresWhereInput | GenresWhereInput[]
+    OR?: GenresWhereInput[]
+    NOT?: GenresWhereInput | GenresWhereInput[]
+    createdAt?: DateTimeFilter<"Genres"> | Date | string
+    updatedAt?: DateTimeFilter<"Genres"> | Date | string
+    movies?: MoviesListRelationFilter
+  }, "id" | "name">
+
+  export type GenresOrderByWithAggregationInput = {
+    id?: SortOrder
+    name?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: GenresCountOrderByAggregateInput
+    _avg?: GenresAvgOrderByAggregateInput
+    _max?: GenresMaxOrderByAggregateInput
+    _min?: GenresMinOrderByAggregateInput
+    _sum?: GenresSumOrderByAggregateInput
+  }
+
+  export type GenresScalarWhereWithAggregatesInput = {
+    AND?: GenresScalarWhereWithAggregatesInput | GenresScalarWhereWithAggregatesInput[]
+    OR?: GenresScalarWhereWithAggregatesInput[]
+    NOT?: GenresScalarWhereWithAggregatesInput | GenresScalarWhereWithAggregatesInput[]
+    id?: IntWithAggregatesFilter<"Genres"> | number
+    name?: StringWithAggregatesFilter<"Genres"> | string
+    createdAt?: DateTimeWithAggregatesFilter<"Genres"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"Genres"> | Date | string
   }
 
   export type UsersCreateInput = {
     name: string
     email: string
-    password: string
     createdAt?: Date | string
     updatedAt?: Date | string
     movies?: MoviesCreateNestedManyWithoutUsersInput
@@ -3257,7 +4422,6 @@ export namespace Prisma {
     id?: number
     name: string
     email: string
-    password: string
     createdAt?: Date | string
     updatedAt?: Date | string
     movies?: MoviesUncheckedCreateNestedManyWithoutUsersInput
@@ -3266,7 +4430,6 @@ export namespace Prisma {
   export type UsersUpdateInput = {
     name?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
-    password?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     movies?: MoviesUpdateManyWithoutUsersNestedInput
@@ -3276,7 +4439,6 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     name?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
-    password?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     movies?: MoviesUncheckedUpdateManyWithoutUsersNestedInput
@@ -3286,7 +4448,6 @@ export namespace Prisma {
     id?: number
     name: string
     email: string
-    password: string
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -3294,7 +4455,6 @@ export namespace Prisma {
   export type UsersUpdateManyMutationInput = {
     name?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
-    password?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -3303,7 +4463,6 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     name?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
-    password?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -3317,6 +4476,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     Users?: UsersCreateNestedOneWithoutMoviesInput
+    Genres?: GenresCreateNestedOneWithoutMoviesInput
   }
 
   export type MoviesUncheckedCreateInput = {
@@ -3329,17 +4489,19 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     usersId?: number | null
+    genresName: string
   }
 
   export type MoviesUpdateInput = {
     title?: StringFieldUpdateOperationsInput | string
     year?: IntFieldUpdateOperationsInput | number
     cover_img?: StringFieldUpdateOperationsInput | string
-    score?: IntFieldUpdateOperationsInput | number
+    score?: FloatFieldUpdateOperationsInput | number
     genres?: MoviesUpdategenresInput | string[]
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     Users?: UsersUpdateOneWithoutMoviesNestedInput
+    Genres?: GenresUpdateOneWithoutMoviesNestedInput
   }
 
   export type MoviesUncheckedUpdateInput = {
@@ -3347,11 +4509,12 @@ export namespace Prisma {
     title?: StringFieldUpdateOperationsInput | string
     year?: IntFieldUpdateOperationsInput | number
     cover_img?: StringFieldUpdateOperationsInput | string
-    score?: IntFieldUpdateOperationsInput | number
+    score?: FloatFieldUpdateOperationsInput | number
     genres?: MoviesUpdategenresInput | string[]
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     usersId?: NullableIntFieldUpdateOperationsInput | number | null
+    genresName?: StringFieldUpdateOperationsInput | string
   }
 
   export type MoviesCreateManyInput = {
@@ -3364,13 +4527,14 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     usersId?: number | null
+    genresName: string
   }
 
   export type MoviesUpdateManyMutationInput = {
     title?: StringFieldUpdateOperationsInput | string
     year?: IntFieldUpdateOperationsInput | number
     cover_img?: StringFieldUpdateOperationsInput | string
-    score?: IntFieldUpdateOperationsInput | number
+    score?: FloatFieldUpdateOperationsInput | number
     genres?: MoviesUpdategenresInput | string[]
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -3381,11 +4545,62 @@ export namespace Prisma {
     title?: StringFieldUpdateOperationsInput | string
     year?: IntFieldUpdateOperationsInput | number
     cover_img?: StringFieldUpdateOperationsInput | string
-    score?: IntFieldUpdateOperationsInput | number
+    score?: FloatFieldUpdateOperationsInput | number
     genres?: MoviesUpdategenresInput | string[]
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     usersId?: NullableIntFieldUpdateOperationsInput | number | null
+    genresName?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type GenresCreateInput = {
+    name: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    movies?: MoviesCreateNestedManyWithoutGenresInput
+  }
+
+  export type GenresUncheckedCreateInput = {
+    id?: number
+    name: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    movies?: MoviesUncheckedCreateNestedManyWithoutGenresInput
+  }
+
+  export type GenresUpdateInput = {
+    name?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    movies?: MoviesUpdateManyWithoutGenresNestedInput
+  }
+
+  export type GenresUncheckedUpdateInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    name?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    movies?: MoviesUncheckedUpdateManyWithoutGenresNestedInput
+  }
+
+  export type GenresCreateManyInput = {
+    id?: number
+    name: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type GenresUpdateManyMutationInput = {
+    name?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type GenresUncheckedUpdateManyInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    name?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type IntFilter<$PrismaModel = never> = {
@@ -3439,7 +4654,6 @@ export namespace Prisma {
     id?: SortOrder
     name?: SortOrder
     email?: SortOrder
-    password?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -3452,7 +4666,6 @@ export namespace Prisma {
     id?: SortOrder
     name?: SortOrder
     email?: SortOrder
-    password?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -3461,7 +4674,6 @@ export namespace Prisma {
     id?: SortOrder
     name?: SortOrder
     email?: SortOrder
-    password?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -3518,6 +4730,17 @@ export namespace Prisma {
     _max?: NestedDateTimeFilter<$PrismaModel>
   }
 
+  export type FloatFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel>
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatFilter<$PrismaModel> | number
+  }
+
   export type StringNullableListFilter<$PrismaModel = never> = {
     equals?: string[] | ListStringFieldRefInput<$PrismaModel> | null
     has?: string | StringFieldRefInput<$PrismaModel> | null
@@ -3542,6 +4765,11 @@ export namespace Prisma {
     isNot?: UsersWhereInput | null
   }
 
+  export type GenresNullableRelationFilter = {
+    is?: GenresWhereInput | null
+    isNot?: GenresWhereInput | null
+  }
+
   export type SortOrderInput = {
     sort: SortOrder
     nulls?: NullsOrder
@@ -3557,6 +4785,7 @@ export namespace Prisma {
     createdAt?: SortOrder
     updatedAt?: SortOrder
     usersId?: SortOrder
+    genresName?: SortOrder
   }
 
   export type MoviesAvgOrderByAggregateInput = {
@@ -3575,6 +4804,7 @@ export namespace Prisma {
     createdAt?: SortOrder
     updatedAt?: SortOrder
     usersId?: SortOrder
+    genresName?: SortOrder
   }
 
   export type MoviesMinOrderByAggregateInput = {
@@ -3586,6 +4816,7 @@ export namespace Prisma {
     createdAt?: SortOrder
     updatedAt?: SortOrder
     usersId?: SortOrder
+    genresName?: SortOrder
   }
 
   export type MoviesSumOrderByAggregateInput = {
@@ -3593,6 +4824,22 @@ export namespace Prisma {
     year?: SortOrder
     score?: SortOrder
     usersId?: SortOrder
+  }
+
+  export type FloatWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel>
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatWithAggregatesFilter<$PrismaModel> | number
+    _count?: NestedIntFilter<$PrismaModel>
+    _avg?: NestedFloatFilter<$PrismaModel>
+    _sum?: NestedFloatFilter<$PrismaModel>
+    _min?: NestedFloatFilter<$PrismaModel>
+    _max?: NestedFloatFilter<$PrismaModel>
   }
 
   export type IntNullableWithAggregatesFilter<$PrismaModel = never> = {
@@ -3609,6 +4856,35 @@ export namespace Prisma {
     _sum?: NestedIntNullableFilter<$PrismaModel>
     _min?: NestedIntNullableFilter<$PrismaModel>
     _max?: NestedIntNullableFilter<$PrismaModel>
+  }
+
+  export type GenresCountOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type GenresAvgOrderByAggregateInput = {
+    id?: SortOrder
+  }
+
+  export type GenresMaxOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type GenresMinOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type GenresSumOrderByAggregateInput = {
+    id?: SortOrder
   }
 
   export type MoviesCreateNestedManyWithoutUsersInput = {
@@ -3679,6 +4955,20 @@ export namespace Prisma {
     connect?: UsersWhereUniqueInput
   }
 
+  export type GenresCreateNestedOneWithoutMoviesInput = {
+    create?: XOR<GenresCreateWithoutMoviesInput, GenresUncheckedCreateWithoutMoviesInput>
+    connectOrCreate?: GenresCreateOrConnectWithoutMoviesInput
+    connect?: GenresWhereUniqueInput
+  }
+
+  export type FloatFieldUpdateOperationsInput = {
+    set?: number
+    increment?: number
+    decrement?: number
+    multiply?: number
+    divide?: number
+  }
+
   export type MoviesUpdategenresInput = {
     set?: string[]
     push?: string | string[]
@@ -3694,12 +4984,64 @@ export namespace Prisma {
     update?: XOR<XOR<UsersUpdateToOneWithWhereWithoutMoviesInput, UsersUpdateWithoutMoviesInput>, UsersUncheckedUpdateWithoutMoviesInput>
   }
 
+  export type GenresUpdateOneWithoutMoviesNestedInput = {
+    create?: XOR<GenresCreateWithoutMoviesInput, GenresUncheckedCreateWithoutMoviesInput>
+    connectOrCreate?: GenresCreateOrConnectWithoutMoviesInput
+    upsert?: GenresUpsertWithoutMoviesInput
+    disconnect?: GenresWhereInput | boolean
+    delete?: GenresWhereInput | boolean
+    connect?: GenresWhereUniqueInput
+    update?: XOR<XOR<GenresUpdateToOneWithWhereWithoutMoviesInput, GenresUpdateWithoutMoviesInput>, GenresUncheckedUpdateWithoutMoviesInput>
+  }
+
   export type NullableIntFieldUpdateOperationsInput = {
     set?: number | null
     increment?: number
     decrement?: number
     multiply?: number
     divide?: number
+  }
+
+  export type MoviesCreateNestedManyWithoutGenresInput = {
+    create?: XOR<MoviesCreateWithoutGenresInput, MoviesUncheckedCreateWithoutGenresInput> | MoviesCreateWithoutGenresInput[] | MoviesUncheckedCreateWithoutGenresInput[]
+    connectOrCreate?: MoviesCreateOrConnectWithoutGenresInput | MoviesCreateOrConnectWithoutGenresInput[]
+    createMany?: MoviesCreateManyGenresInputEnvelope
+    connect?: MoviesWhereUniqueInput | MoviesWhereUniqueInput[]
+  }
+
+  export type MoviesUncheckedCreateNestedManyWithoutGenresInput = {
+    create?: XOR<MoviesCreateWithoutGenresInput, MoviesUncheckedCreateWithoutGenresInput> | MoviesCreateWithoutGenresInput[] | MoviesUncheckedCreateWithoutGenresInput[]
+    connectOrCreate?: MoviesCreateOrConnectWithoutGenresInput | MoviesCreateOrConnectWithoutGenresInput[]
+    createMany?: MoviesCreateManyGenresInputEnvelope
+    connect?: MoviesWhereUniqueInput | MoviesWhereUniqueInput[]
+  }
+
+  export type MoviesUpdateManyWithoutGenresNestedInput = {
+    create?: XOR<MoviesCreateWithoutGenresInput, MoviesUncheckedCreateWithoutGenresInput> | MoviesCreateWithoutGenresInput[] | MoviesUncheckedCreateWithoutGenresInput[]
+    connectOrCreate?: MoviesCreateOrConnectWithoutGenresInput | MoviesCreateOrConnectWithoutGenresInput[]
+    upsert?: MoviesUpsertWithWhereUniqueWithoutGenresInput | MoviesUpsertWithWhereUniqueWithoutGenresInput[]
+    createMany?: MoviesCreateManyGenresInputEnvelope
+    set?: MoviesWhereUniqueInput | MoviesWhereUniqueInput[]
+    disconnect?: MoviesWhereUniqueInput | MoviesWhereUniqueInput[]
+    delete?: MoviesWhereUniqueInput | MoviesWhereUniqueInput[]
+    connect?: MoviesWhereUniqueInput | MoviesWhereUniqueInput[]
+    update?: MoviesUpdateWithWhereUniqueWithoutGenresInput | MoviesUpdateWithWhereUniqueWithoutGenresInput[]
+    updateMany?: MoviesUpdateManyWithWhereWithoutGenresInput | MoviesUpdateManyWithWhereWithoutGenresInput[]
+    deleteMany?: MoviesScalarWhereInput | MoviesScalarWhereInput[]
+  }
+
+  export type MoviesUncheckedUpdateManyWithoutGenresNestedInput = {
+    create?: XOR<MoviesCreateWithoutGenresInput, MoviesUncheckedCreateWithoutGenresInput> | MoviesCreateWithoutGenresInput[] | MoviesUncheckedCreateWithoutGenresInput[]
+    connectOrCreate?: MoviesCreateOrConnectWithoutGenresInput | MoviesCreateOrConnectWithoutGenresInput[]
+    upsert?: MoviesUpsertWithWhereUniqueWithoutGenresInput | MoviesUpsertWithWhereUniqueWithoutGenresInput[]
+    createMany?: MoviesCreateManyGenresInputEnvelope
+    set?: MoviesWhereUniqueInput | MoviesWhereUniqueInput[]
+    disconnect?: MoviesWhereUniqueInput | MoviesWhereUniqueInput[]
+    delete?: MoviesWhereUniqueInput | MoviesWhereUniqueInput[]
+    connect?: MoviesWhereUniqueInput | MoviesWhereUniqueInput[]
+    update?: MoviesUpdateWithWhereUniqueWithoutGenresInput | MoviesUpdateWithWhereUniqueWithoutGenresInput[]
+    updateMany?: MoviesUpdateManyWithWhereWithoutGenresInput | MoviesUpdateManyWithWhereWithoutGenresInput[]
+    deleteMany?: MoviesScalarWhereInput | MoviesScalarWhereInput[]
   }
 
   export type NestedIntFilter<$PrismaModel = never> = {
@@ -3807,6 +5149,22 @@ export namespace Prisma {
     not?: NestedIntNullableFilter<$PrismaModel> | number | null
   }
 
+  export type NestedFloatWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel>
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatWithAggregatesFilter<$PrismaModel> | number
+    _count?: NestedIntFilter<$PrismaModel>
+    _avg?: NestedFloatFilter<$PrismaModel>
+    _sum?: NestedFloatFilter<$PrismaModel>
+    _min?: NestedFloatFilter<$PrismaModel>
+    _max?: NestedFloatFilter<$PrismaModel>
+  }
+
   export type NestedIntNullableWithAggregatesFilter<$PrismaModel = never> = {
     equals?: number | IntFieldRefInput<$PrismaModel> | null
     in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
@@ -3842,6 +5200,7 @@ export namespace Prisma {
     genres?: MoviesCreategenresInput | string[]
     createdAt?: Date | string
     updatedAt?: Date | string
+    Genres?: GenresCreateNestedOneWithoutMoviesInput
   }
 
   export type MoviesUncheckedCreateWithoutUsersInput = {
@@ -3853,6 +5212,7 @@ export namespace Prisma {
     genres?: MoviesCreategenresInput | string[]
     createdAt?: Date | string
     updatedAt?: Date | string
+    genresName: string
   }
 
   export type MoviesCreateOrConnectWithoutUsersInput = {
@@ -3889,17 +5249,17 @@ export namespace Prisma {
     title?: StringFilter<"Movies"> | string
     year?: IntFilter<"Movies"> | number
     cover_img?: StringFilter<"Movies"> | string
-    score?: IntFilter<"Movies"> | number
+    score?: FloatFilter<"Movies"> | number
     genres?: StringNullableListFilter<"Movies">
     createdAt?: DateTimeFilter<"Movies"> | Date | string
     updatedAt?: DateTimeFilter<"Movies"> | Date | string
     usersId?: IntNullableFilter<"Movies"> | number | null
+    genresName?: StringFilter<"Movies"> | string
   }
 
   export type UsersCreateWithoutMoviesInput = {
     name: string
     email: string
-    password: string
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -3908,7 +5268,6 @@ export namespace Prisma {
     id?: number
     name: string
     email: string
-    password: string
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -3916,6 +5275,24 @@ export namespace Prisma {
   export type UsersCreateOrConnectWithoutMoviesInput = {
     where: UsersWhereUniqueInput
     create: XOR<UsersCreateWithoutMoviesInput, UsersUncheckedCreateWithoutMoviesInput>
+  }
+
+  export type GenresCreateWithoutMoviesInput = {
+    name: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type GenresUncheckedCreateWithoutMoviesInput = {
+    id?: number
+    name: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type GenresCreateOrConnectWithoutMoviesInput = {
+    where: GenresWhereUniqueInput
+    create: XOR<GenresCreateWithoutMoviesInput, GenresUncheckedCreateWithoutMoviesInput>
   }
 
   export type UsersUpsertWithoutMoviesInput = {
@@ -3932,7 +5309,6 @@ export namespace Prisma {
   export type UsersUpdateWithoutMoviesInput = {
     name?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
-    password?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -3941,9 +5317,81 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     name?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
-    password?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type GenresUpsertWithoutMoviesInput = {
+    update: XOR<GenresUpdateWithoutMoviesInput, GenresUncheckedUpdateWithoutMoviesInput>
+    create: XOR<GenresCreateWithoutMoviesInput, GenresUncheckedCreateWithoutMoviesInput>
+    where?: GenresWhereInput
+  }
+
+  export type GenresUpdateToOneWithWhereWithoutMoviesInput = {
+    where?: GenresWhereInput
+    data: XOR<GenresUpdateWithoutMoviesInput, GenresUncheckedUpdateWithoutMoviesInput>
+  }
+
+  export type GenresUpdateWithoutMoviesInput = {
+    name?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type GenresUncheckedUpdateWithoutMoviesInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    name?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type MoviesCreateWithoutGenresInput = {
+    title: string
+    year: number
+    cover_img: string
+    score: number
+    genres?: MoviesCreategenresInput | string[]
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    Users?: UsersCreateNestedOneWithoutMoviesInput
+  }
+
+  export type MoviesUncheckedCreateWithoutGenresInput = {
+    id?: number
+    title: string
+    year: number
+    cover_img: string
+    score: number
+    genres?: MoviesCreategenresInput | string[]
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    usersId?: number | null
+  }
+
+  export type MoviesCreateOrConnectWithoutGenresInput = {
+    where: MoviesWhereUniqueInput
+    create: XOR<MoviesCreateWithoutGenresInput, MoviesUncheckedCreateWithoutGenresInput>
+  }
+
+  export type MoviesCreateManyGenresInputEnvelope = {
+    data: MoviesCreateManyGenresInput | MoviesCreateManyGenresInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type MoviesUpsertWithWhereUniqueWithoutGenresInput = {
+    where: MoviesWhereUniqueInput
+    update: XOR<MoviesUpdateWithoutGenresInput, MoviesUncheckedUpdateWithoutGenresInput>
+    create: XOR<MoviesCreateWithoutGenresInput, MoviesUncheckedCreateWithoutGenresInput>
+  }
+
+  export type MoviesUpdateWithWhereUniqueWithoutGenresInput = {
+    where: MoviesWhereUniqueInput
+    data: XOR<MoviesUpdateWithoutGenresInput, MoviesUncheckedUpdateWithoutGenresInput>
+  }
+
+  export type MoviesUpdateManyWithWhereWithoutGenresInput = {
+    where: MoviesScalarWhereInput
+    data: XOR<MoviesUpdateManyMutationInput, MoviesUncheckedUpdateManyWithoutGenresInput>
   }
 
   export type MoviesCreateManyUsersInput = {
@@ -3955,16 +5403,18 @@ export namespace Prisma {
     genres?: MoviesCreategenresInput | string[]
     createdAt?: Date | string
     updatedAt?: Date | string
+    genresName: string
   }
 
   export type MoviesUpdateWithoutUsersInput = {
     title?: StringFieldUpdateOperationsInput | string
     year?: IntFieldUpdateOperationsInput | number
     cover_img?: StringFieldUpdateOperationsInput | string
-    score?: IntFieldUpdateOperationsInput | number
+    score?: FloatFieldUpdateOperationsInput | number
     genres?: MoviesUpdategenresInput | string[]
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    Genres?: GenresUpdateOneWithoutMoviesNestedInput
   }
 
   export type MoviesUncheckedUpdateWithoutUsersInput = {
@@ -3972,10 +5422,11 @@ export namespace Prisma {
     title?: StringFieldUpdateOperationsInput | string
     year?: IntFieldUpdateOperationsInput | number
     cover_img?: StringFieldUpdateOperationsInput | string
-    score?: IntFieldUpdateOperationsInput | number
+    score?: FloatFieldUpdateOperationsInput | number
     genres?: MoviesUpdategenresInput | string[]
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    genresName?: StringFieldUpdateOperationsInput | string
   }
 
   export type MoviesUncheckedUpdateManyWithoutUsersInput = {
@@ -3983,10 +5434,58 @@ export namespace Prisma {
     title?: StringFieldUpdateOperationsInput | string
     year?: IntFieldUpdateOperationsInput | number
     cover_img?: StringFieldUpdateOperationsInput | string
-    score?: IntFieldUpdateOperationsInput | number
+    score?: FloatFieldUpdateOperationsInput | number
     genres?: MoviesUpdategenresInput | string[]
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    genresName?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type MoviesCreateManyGenresInput = {
+    id?: number
+    title: string
+    year: number
+    cover_img: string
+    score: number
+    genres?: MoviesCreategenresInput | string[]
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    usersId?: number | null
+  }
+
+  export type MoviesUpdateWithoutGenresInput = {
+    title?: StringFieldUpdateOperationsInput | string
+    year?: IntFieldUpdateOperationsInput | number
+    cover_img?: StringFieldUpdateOperationsInput | string
+    score?: FloatFieldUpdateOperationsInput | number
+    genres?: MoviesUpdategenresInput | string[]
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    Users?: UsersUpdateOneWithoutMoviesNestedInput
+  }
+
+  export type MoviesUncheckedUpdateWithoutGenresInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    title?: StringFieldUpdateOperationsInput | string
+    year?: IntFieldUpdateOperationsInput | number
+    cover_img?: StringFieldUpdateOperationsInput | string
+    score?: FloatFieldUpdateOperationsInput | number
+    genres?: MoviesUpdategenresInput | string[]
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    usersId?: NullableIntFieldUpdateOperationsInput | number | null
+  }
+
+  export type MoviesUncheckedUpdateManyWithoutGenresInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    title?: StringFieldUpdateOperationsInput | string
+    year?: IntFieldUpdateOperationsInput | number
+    cover_img?: StringFieldUpdateOperationsInput | string
+    score?: FloatFieldUpdateOperationsInput | number
+    genres?: MoviesUpdategenresInput | string[]
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    usersId?: NullableIntFieldUpdateOperationsInput | number | null
   }
 
 
@@ -4002,6 +5501,10 @@ export namespace Prisma {
      * @deprecated Use MoviesDefaultArgs instead
      */
     export type MoviesArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = MoviesDefaultArgs<ExtArgs>
+    /**
+     * @deprecated Use GenresDefaultArgs instead
+     */
+    export type GenresArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = GenresDefaultArgs<ExtArgs>
 
   /**
    * Batch Payload for updateMany & deleteMany & createMany

@@ -8,17 +8,17 @@ import { adaptIdToDB } from "../utils/functions";
 
 export const createUser = async (req: Request, res: Response) => {
 
-    const { name, email, password } = req.body;
+    const { name, email } = req.body;
 
     try {
 
-        if (!name || !email || !password) {
+        if (!name || !email) {
             res.status(400).send({ error: "Missing one or more required fields" });
         }
 
         //@ts-ignore
         const newUser = await prisma.users.create({
-            data: { name, email, password }
+            data: { name, email }
         })
 
         res.status(201).send(newUser);
@@ -34,9 +34,9 @@ export const getAllUsers = async (req: Request, res: Response) => {
     try {
 
         //@ts-ignore
-        const allUsers = await prisma.users.findMany();
-
-        res.status(201).json(allUsers);
+        const allUsers = await prisma.users.findMany()
+        console.log(allUsers)
+        res.status(200).send(allUsers);
 
     } catch (error) {
 
@@ -44,24 +44,25 @@ export const getAllUsers = async (req: Request, res: Response) => {
     }
 }
 
-export const getUserById = async (req: Request, res: Response) => {
+export const getUserByEmail = async (req: Request, res: Response) => {
 
-    const { id } = req.params;
-    const userId = adaptIdToDB(id);
+    const { userEmail } = req.params;
+
 
     try {
 
         //@ts-ignore
         const requiredUser = await prisma.users.findUnique({
             where: {
-                id: userId
+                email: userEmail
             },
             include: {
                 movies: true
             }
         });
 
-        // 
+        if (!requiredUser) res.status(404).send("user not found");
+
         res.status(201).send(requiredUser);
 
 

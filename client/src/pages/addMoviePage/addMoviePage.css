@@ -1,0 +1,23 @@
+.form-section {
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.add-movie-heading {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 30px;
+    padding-bottom: 5px;
+}
+
+.add-movie-logo {
+
+    height: 56px;
+    width: 160px;
+
+}
