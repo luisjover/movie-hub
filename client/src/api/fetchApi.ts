@@ -63,18 +63,71 @@ export const createNewUser = async (user: User, getToken: any) => {
 
 //CREATE NEW MOVIE 
 
-export const createNewMovie = async (userId: number, formData: FormData, getToken: any) => {
+export const createNewMovie = async (userId: number, data: any, getToken: any) => {
 
     console.log("entra a create")
     const accessToken = await getToken();
+
+    const formData = new FormData();
+    formData.append("title", data.title);
+    formData.append("year", data.year);
+    formData.append("score", data.score);
+    formData.append("genre", data.genre);
+    formData.append("image", data.image[0]);
+
 
     const response = await fetch(`http://localhost:8080/movies/${userId}`, {
         method: "POST",
         headers: {
             authorization: `Bearer ${accessToken}`,
-            "Content-type": "application/json; charset=UTF-8"
         },
         body: formData
+    })
+    const dataFetched = await response.json();
+    return dataFetched;
+}
+
+
+//UPDATE EXISTING MOVIE {
+
+export const updateMovieById = async (movieId: number, data: any, getToken: any) => {
+
+    console.log("entering on update")
+    const accessToken = await getToken();
+
+    const formData = new FormData();
+    formData.append("title", data.title);
+    formData.append("year", data.year);
+    formData.append("score", data.score);
+    formData.append("genre", data.genre);
+    formData.append("image", data.image[0]);
+
+
+    const response = await fetch(`http://localhost:8080/movies/${movieId}`, {
+        method: "PUT",
+        headers: {
+            authorization: `Bearer ${accessToken}`,
+        },
+        body: formData
+    })
+    const dataFetched = await response.json();
+    return dataFetched;
+}
+
+
+//DELETE EXISTING MOVIE 
+
+export const deleteMovie = async (movieId: number, getToken: any) => {
+
+    console.log("entering on delete")
+    const accessToken = await getToken();
+
+
+    const response = await fetch(`http://localhost:8080/movies/${movieId}`, {
+        method: "DELETE",
+        headers: {
+            authorization: `Bearer ${accessToken}`,
+        }
     })
     const dataFetched = await response.json();
     return dataFetched;

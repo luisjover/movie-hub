@@ -134,8 +134,8 @@ exports.Prisma.MoviesScalarFieldEnum = {
   title: 'title',
   year: 'year',
   cover_img: 'cover_img',
+  cover_img_public: 'cover_img_public',
   score: 'score',
-  genres: 'genres',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
   usersId: 'usersId',
@@ -144,9 +144,7 @@ exports.Prisma.MoviesScalarFieldEnum = {
 
 exports.Prisma.GenresScalarFieldEnum = {
   id: 'id',
-  name: 'name',
-  createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
+  name: 'name'
 };
 
 exports.Prisma.SortOrder = {

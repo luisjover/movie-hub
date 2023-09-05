@@ -2,11 +2,10 @@ import { useForm } from "react-hook-form";
 import { useEffect, useState } from "react";
 import PreviewBg from "../../assets/images/img-preview-bg.jpg";
 import { useAuth0 } from "@auth0/auth0-react";
-import "./addMovieForm.css";
+import "./updateMovieForm.css";
 import toast, { Toaster } from "react-hot-toast";
-import { useUserContext } from "../../utils/hooks/useUserContext";
-import { createNewMovie } from "../../api/fetchApi";
-
+import { deleteMovie, updateMovieById } from "../../api/fetchApi";
+import { Icon } from '@iconify/react';
 
 
 // enum MoviesGenres {
@@ -24,7 +23,7 @@ import { createNewMovie } from "../../api/fetchApi";
 // }
 
 
-export const AddMovieForm = () => {
+export const UpdateMovieForm = ({ ...props }) => {
 
 
 
@@ -32,7 +31,6 @@ export const AddMovieForm = () => {
     const [uploadingImageUrl, setUploadingImageUrl] = useState<any | null>(null);
     const [seenState, setSeenState] = useState(false);
     const { getAccessTokenSilently } = useAuth0();
-    const { currentUser } = useUserContext();
 
 
 
@@ -49,14 +47,24 @@ export const AddMovieForm = () => {
 
     const submitForm = async (data: any) => {
 
-        const userId = currentUser?.id;
+        // const userId = currentUser?.id;
         toast.success('Movie is being uploaded...')
 
-        if (userId) await createNewMovie(userId, data, getAccessTokenSilently);
+        // if (userId)
+        await updateMovieById(props.movieId, data, getAccessTokenSilently);
 
         reset();
         toast.success('Movie uploaded successfully...')
         setUploadingImageUrl(null);
+        props.closeModal();
+        location.reload();
+    }
+
+    const handleDeleteMovie = () => {
+        deleteMovie(props.movieId, getAccessTokenSilently)
+        props.closeModal();
+        location.reload();
+
     }
 
 
@@ -84,7 +92,7 @@ export const AddMovieForm = () => {
     return (
 
 
-        <>
+        <div className="big-modal-container">
             <form className="add-movie-form" onSubmit={handleSubmit(submitForm)}>
                 <Toaster
                     position="top-center"
@@ -217,10 +225,12 @@ export const AddMovieForm = () => {
 
                 <button className="add-movie-submit-btn" type="submit">Upload</button>
             </form>
-            <div className="white-space-form">
+            <div className="white-space-update-form">
+                <Icon className="delete-icon" icon="icomoon-free:bin" onClick={handleDeleteMovie} />
 
             </div>
-        </>
+
+        </div>
 
     )
 }

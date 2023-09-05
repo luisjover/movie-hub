@@ -18,26 +18,23 @@ model Users {
 }
 
 model Movies {
-    id        Int      @id @default(autoincrement())
-    title     String   @db.VarChar(255)
-    year      Int
-    cover_img String
-    score     Float
-    genres    String[]
-    createdAt DateTime @default(now())
-    updatedAt DateTime @updatedAt
-
-    Users   Users? @relation(fields: [usersId], references: [id], onDelete: Cascade)
-    usersId Int?
+    id               Int      @id @default(autoincrement())
+    title            String   @db.VarChar(255)
+    year             Int
+    cover_img        String
+    cover_img_public String
+    score            Float
+    createdAt        DateTime @default(now())
+    updatedAt        DateTime @updatedAt
+    Users            Users?   @relation(fields: [usersId], references: [id], onDelete: Cascade)
+    usersId          Int?
 
     Genres     Genres? @relation(fields: [genresName], references: [name], onDelete: Cascade)
     genresName String
 }
 
 model Genres {
-    id        Int      @id @default(autoincrement())
-    name      String   @unique
-    createdAt DateTime @default(now())
-    updatedAt DateTime @updatedAt
-    movies    Movies[]
+    id     Int      @id @default(autoincrement())
+    name   String   @unique
+    movies Movies[]
 }

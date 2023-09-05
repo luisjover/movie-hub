@@ -8,7 +8,7 @@ type FilterCategories = {
 enum MoviesFilters {
     ALL = "all",
     HORROR = "horror",
-    SCIFI = "Sci-fi",
+    SCIFI = "scifi",
     FANTASY = "fantasy",
     ANIMATION = "animation",
     THRILLER = "thriller",

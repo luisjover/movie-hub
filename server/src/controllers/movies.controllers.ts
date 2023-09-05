@@ -2,6 +2,7 @@ import { Request, Response } from "express";
 import prisma from "../db/clientPrisma";
 import { adaptIdToDB } from "../utils/functions";
 import { uploadImageToCloudinary } from "../utils/cloudinary";
+import fs from 'fs-extra';
 
 
 
@@ -10,20 +11,28 @@ export const addMovie = async (req: Request, res: Response) => {
 
     const { userId } = req.params;
     const parsedId = adaptIdToDB(userId);
+    console.log(req.body)
 
     try {
 
-        if ((req.files as any)?.cover_img) {
-            const cloudAsset = await uploadImageToCloudinary((req.files as any).cover_img.tempFilePath);
+        if ((req.files as any)?.image) {
+
+            const cloudAsset = await uploadImageToCloudinary((req.files as any).image.tempFilePath);
+            await fs.unlink((req.files as any).image.tempFilePath);
 
             //@ts-ignore
             const newMovie = await prisma.movies.create({
                 data: {
                     title: req.body.title,
-                    year: req.body.year,
+                    year: parseInt(req.body.year),
+                    score: parseInt(req.body.score),
+                    Genres: {
+                        connect: {
+                            name: req.body.genre
+                        }
+                    },
                     cover_img: cloudAsset.secure_url,
-                    score: req.body.score,
-                    genres: req.body.genre,
+                    cover_img_public: cloudAsset.public_id,
                     Users: {
                         connect: {
                             id: parsedId
@@ -39,6 +48,7 @@ export const addMovie = async (req: Request, res: Response) => {
 
     } catch (error) {
         res.status(500).send(error);
+        console.log(error)
     }
 }
 
@@ -79,45 +89,58 @@ export const updateMovie = async (req: Request, res: Response) => {
 
     try {
 
-        if ((req.files as any)?.cover_img) {
-            const cloudAsset = await uploadImageToCloudinary((req.files as any).cover_img.tempFilePath);
+        if ((req.files as any)?.image) {
+
+            const cloudAsset = await uploadImageToCloudinary((req.files as any).image.tempFilePath);
 
             //@ts-ignore
             const updatedMovie = await prisma.movies.update({
                 where: { id: parsedId },
                 data: {
                     title: req.body.title,
-                    year: req.body.year,
+                    year: parseInt(req.body.year),
+                    score: parseInt(req.body.score),
+                    Genres: {
+                        connect: {
+                            name: req.body.genre
+                        }
+                    },
                     cover_img: cloudAsset.secure_url,
-                    score: req.body.score,
-                    genres: req.body.genre
+                    cover_img_public: cloudAsset.public_id
                 }
             });
+
+            console.log(updatedMovie)
 
             res.status(201).send(updatedMovie);
         }
 
     } catch (error) {
         res.status(500).send(error);
+        console.log(error)
     }
 
 }
 
-export const deleteMovie = (req: Request, res: Response) => {
+export const deleteMovie = async (req: Request, res: Response) => {
 
+    console.log("entering on deleteMovie on backend")
     const { movieId } = req.params;
     const parsedId = adaptIdToDB(movieId);
 
     try {
 
         //@ts-ignore
-        const deletedMovie = prisma.movies.delete({
+        const deletedMovie = await prisma.movies.delete({
             where: { id: parsedId }
         });
+        console.log(deletedMovie)
 
         res.status(200).send(deletedMovie);
 
-    } catch (error) {
 
+    } catch (error) {
+        res.status(500).send(error);
+        console.log(error)
     }
 }

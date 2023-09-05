@@ -34,13 +34,27 @@ export const getAllUsers = async (req: Request, res: Response) => {
     try {
 
         //@ts-ignore
-        const allUsers = await prisma.users.findMany()
+        const allUsers = await prisma.users.findMany({
+            include: {
+                movies: {
+                    select: {
+                        id: true,
+                        title: true,
+                        score: true,
+                        year: true,
+                        genresName: true,
+                        cover_img: true
+                    }
+                }
+            }
+        })
         console.log(allUsers)
         res.status(200).send(allUsers);
 
     } catch (error) {
 
         res.status(500).send(error);
+        console.log(error)
     }
 }
 

@@ -14,8 +14,8 @@ type Movie = {
     title: string,
     year: number,
     score: number,
-    genre: string,
-    imageUrl: string
+    genresName: string,
+    cover_img: string
 }
 
 
@@ -32,32 +32,35 @@ export const FavPage = () => {
 
     if (userMovies === null) {
 
-        const fetchedMovies: Movie[] = []
+        let fetchedMovies: Movie[] = []
         //BUG when first chargin page, sometimes render all items, sometimes no-.
 
         const getFetch = async () => {
             if (user?.email === undefined) return
             const userData = await getUserByEmail(user?.email, getAccessTokenSilently)
-            const fetchedMovies = userData.movies as Movie[]
+            console.log(userData)
+            fetchedMovies = userData.movies as Movie[]
+            setUserMovies(fetchedMovies);
         }
         getFetch()
     }
 
 
     useEffect(() => {
-
+        console.log(currentFilter);
         if (currentFilter === "all") {
             if (userMovies === null) return
             setFilteredMovies(userMovies)
 
         } else {
             if (userMovies === null) return
-            const newFilteredMovies = userMovies?.filter((movie: Movie) => movie.genre.includes(currentFilter))
+            const newFilteredMovies = userMovies?.filter((movie: Movie) => movie.genresName == currentFilter)
             setFilteredMovies(newFilteredMovies)
         }
 
     }, [currentFilter, userMovies]);
 
+    console.log("filtered movies" + filteredMovies)
 
     return (
         <section className='library-page-container'>
@@ -78,15 +81,15 @@ export const FavPage = () => {
                                 id={movie.id}
                                 title={movie.title}
                                 year={movie.year}
-                                genre={movie.genre}
+                                genres={movie.genresName}
                                 score={movie.score}
-                                imageUrl={movie.imageUrl}
+                                cover_img={movie.cover_img}
                             />
                         )
                     })}
                 </div>
 
-                <div className="white-space"></div>
+                <div className="white-space-fav"></div>
             </div>
         </section>
 

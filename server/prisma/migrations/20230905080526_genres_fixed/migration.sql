@@ -1,0 +1,3 @@
+-- AlterTable
+ALTER TABLE "Movies" ALTER COLUMN "genres" SET NOT NULL,
+ALTER COLUMN "genres" SET DATA TYPE TEXT;

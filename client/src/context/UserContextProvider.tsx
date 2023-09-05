@@ -12,8 +12,8 @@ type Movie = {
     id: number,
     title: string,
     year: number,
-    coverImg: string,
-    genre: string,
+    cover_img: string,
+    genresName: string,
     score: number,
     userId: number
 }

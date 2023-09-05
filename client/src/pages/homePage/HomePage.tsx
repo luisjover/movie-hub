@@ -27,7 +27,7 @@ import { useUserContext } from "../../utils/hooks/useUserContext";
 
 export const HomePage = () => {
 
-    const { setCurrentLoggedUser } = useUserContext();
+    const { setCurrentLoggedUser, currentUser } = useUserContext();
 
     const { isAuthenticated, user, getAccessTokenSilently, isLoading, error } = useAuth0();
 
@@ -63,10 +63,10 @@ export const HomePage = () => {
     }, [isAuthenticated])
 
     useEffect(() => {
-
+        console.log(currentUser)
         settingMenu.current?.classList.toggle('setting-menu-container-expanded')
 
-    }, [settingsExpanded])
+    }, [settingsExpanded, currentUser])
 
 
 
