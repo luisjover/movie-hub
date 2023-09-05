@@ -16,7 +16,7 @@ export const SearchPage = () => {
             <SearchBar focus={focus} setFocus={setFocus} searchInput={searchInput} setSearchInput={setSearchInput} />
             {/* {focus ? <SearchList focus={focus} setFocus={setFocus} searchInput={searchInput} setSearchInput={setSearchInput} /> : null} */}
             <div className="construction-container">
-                <Icon className="construction-icon" icon="ic:outline-construction" />
+                <Icon className="construction-icon-search" icon="ic:outline-construction" />
                 <p className="construction-text">IN CONSTRUCTION</p>
             </div>
         </section>

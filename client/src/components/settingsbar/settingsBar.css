@@ -1,5 +1,5 @@
-.settings-menu-bar{
-    display:flex;
+.settings-menu-bar {
+    display: flex;
     flex-direction: column;
     text-align: center;
     align-items: center;
@@ -15,13 +15,14 @@
     backdrop-filter: blur(6px);
 }
 
-.setting-menu-options-construction{
+.setting-menu-options-construction {
     width: 100%;
     display: flex;
     align-items: center;
     justify-content: space-between;
+    color: whitesmoke;
 }
 
-.construction-icon{
-    color: #00ffa3;
+.construction-icon {
+    color: whitesmoke;
 }
