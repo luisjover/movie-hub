@@ -10,10 +10,10 @@ export const AuthenticationGuard = (component: any) => {
 
     onRedirecting: () => (
 
-      <div className="feat(">
+      <div className="loading-spinner-container">
 
         <HashLoader
-          color={"#00ffa3"}
+          color={"#AC090F"}
           loading={true}
           size={100}
           aria-label="Loading Spinner"
