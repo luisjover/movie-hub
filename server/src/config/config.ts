@@ -1,10 +1,10 @@
 import dotenv from "dotenv"
 
 type TConfig = {
-    [key: string]: EnviromentConfig;
+    [key: string]: EnvironmentConfig;
 }
 
-type EnviromentConfig = {
+type EnvironmentConfig = {
     app: AppConfig,
     auth0: Auth0Config,
     cloudinary: CloudinaryConfig
