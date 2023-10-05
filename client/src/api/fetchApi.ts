@@ -65,7 +65,7 @@ export const createNewUser = async (user: User, getToken: any) => {
 
 export const createNewMovie = async (userId: number, data: any, getToken: any) => {
 
-    console.log("entra a create")
+
     const accessToken = await getToken();
 
     const formData = new FormData();
@@ -92,7 +92,7 @@ export const createNewMovie = async (userId: number, data: any, getToken: any) =
 
 export const updateMovieById = async (movieId: number, data: any, getToken: any) => {
 
-    console.log("entering on update")
+
     const accessToken = await getToken();
 
     const formData = new FormData();
@@ -119,7 +119,7 @@ export const updateMovieById = async (movieId: number, data: any, getToken: any)
 
 export const deleteMovie = async (movieId: number, getToken: any) => {
 
-    console.log("entering on delete")
+
     const accessToken = await getToken();
 
 

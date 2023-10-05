@@ -38,7 +38,7 @@ export const FavPage = () => {
         const getFetch = async () => {
             if (user?.email === undefined) return
             const userData = await getUserByEmail(user?.email, getAccessTokenSilently)
-            console.log(userData)
+
             fetchedMovies = userData.movies as Movie[]
             setUserMovies(fetchedMovies);
         }
@@ -47,7 +47,7 @@ export const FavPage = () => {
 
 
     useEffect(() => {
-        console.log(currentFilter);
+
         if (currentFilter === "all") {
             if (userMovies === null) return
             setFilteredMovies(userMovies)
@@ -60,7 +60,7 @@ export const FavPage = () => {
 
     }, [currentFilter, userMovies]);
 
-    console.log("filtered movies" + filteredMovies)
+
 
     return (
         <section className='library-page-container'>

@@ -12,7 +12,7 @@ export const SearchBar: React.FC<SearchProps> = (props: SearchProps) => {
         eventListenerSearchbar();
     }, [])
     useEffect(() => {
-        // console.log(focus)
+
     }, [focus]);
 
     const handleBlur = () => {

@@ -12,7 +12,7 @@ import { useUserContext } from "../../utils/hooks/useUserContext";
 export const ItemList = () => {
 
     const { currentUser } = useUserContext();
-    console.log(currentUser?.movies)
+
 
 
 

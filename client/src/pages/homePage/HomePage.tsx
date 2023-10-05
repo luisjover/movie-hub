@@ -63,7 +63,7 @@ export const HomePage = () => {
     }, [isAuthenticated])
 
     useEffect(() => {
-        console.log(currentUser)
+
         settingMenu.current?.classList.toggle('setting-menu-container-expanded')
 
     }, [settingsExpanded, currentUser])

@@ -4,23 +4,26 @@ import { MdLibraryAdd } from 'react-icons/md';
 import { Icon } from '@iconify/react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
+import { useAuth0 } from '@auth0/auth0-react';
 
 
 export const NavBar = () => {
 
-
+    const { isAuthenticated } = useAuth0();
     const navigate = useNavigate();
     const location = useLocation().pathname.slice(1)
-
-    console.log(location);
-
-
 
 
     useEffect(() => {
 
-        const button = document.querySelector(`#${location}`) as HTMLInputElement;
-        button.checked = true;
+        if (location !== "") {
+            const button = document.querySelector(`#${location}`) as HTMLInputElement;
+            button.checked = true;
+        }
+        else if (location === "" && isAuthenticated) {
+            navigate("/home")
+        }
+
 
     }, [])
 

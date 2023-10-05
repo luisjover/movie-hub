@@ -42,7 +42,7 @@ export const Item: FC<Movie> = ({ ...props }) => {
         setIsOpen(false);
     }
 
-    console.log(props)
+
 
     return (
         <>
