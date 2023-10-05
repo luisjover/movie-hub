@@ -48,7 +48,7 @@ export const getAllUsers = async (req: Request, res: Response) => {
                 }
             }
         })
-        console.log(allUsers)
+
         res.status(200).send(allUsers);
 
     } catch (error) {

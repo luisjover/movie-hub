@@ -8,14 +8,17 @@ import fs from 'fs-extra';
 
 
 export const addMovie = async (req: Request, res: Response) => {
+    console.log("entra en addMovie del back")
 
     const { userId } = req.params;
     const parsedId = adaptIdToDB(userId);
-    console.log(req.body)
+
+    const { title, year, score, genre } = req.body
 
     try {
 
         if ((req.files as any)?.image) {
+            console.log("pasa el if")
 
             const cloudAsset = await uploadImageToCloudinary((req.files as any).image.tempFilePath);
             await fs.unlink((req.files as any).image.tempFilePath);
@@ -23,12 +26,12 @@ export const addMovie = async (req: Request, res: Response) => {
             //@ts-ignore
             const newMovie = await prisma.movies.create({
                 data: {
-                    title: req.body.title,
-                    year: parseInt(req.body.year),
-                    score: parseInt(req.body.score),
+                    title: title,
+                    year: parseInt(year),
+                    score: parseInt(score),
                     Genres: {
                         connect: {
-                            name: req.body.genre
+                            name: genre
                         }
                     },
                     cover_img: cloudAsset.secure_url,
@@ -42,6 +45,7 @@ export const addMovie = async (req: Request, res: Response) => {
             })
             res.status(201).json(newMovie);
         } else {
+            console.log("aqui morimos")
             res.status(400).send("file not provided")
         }
 
@@ -110,7 +114,7 @@ export const updateMovie = async (req: Request, res: Response) => {
                 }
             });
 
-            console.log(updatedMovie)
+
 
             res.status(201).send(updatedMovie);
         }
@@ -124,7 +128,7 @@ export const updateMovie = async (req: Request, res: Response) => {
 
 export const deleteMovie = async (req: Request, res: Response) => {
 
-    console.log("entering on deleteMovie on backend")
+
     const { movieId } = req.params;
     const parsedId = adaptIdToDB(movieId);
 
@@ -134,7 +138,7 @@ export const deleteMovie = async (req: Request, res: Response) => {
         const deletedMovie = await prisma.movies.delete({
             where: { id: parsedId }
         });
-        console.log(deletedMovie)
+
 
         res.status(200).send(deletedMovie);
 
